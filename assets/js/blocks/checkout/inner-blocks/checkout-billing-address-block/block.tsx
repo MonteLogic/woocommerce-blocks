@@ -66,38 +66,45 @@ const Block = ( {
 	] ) as Record< keyof AddressFields, Partial< AddressField > >;
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
+	const localPickupIsSelected = false;
 
-	return (
-		<AddressFormWrapperComponent>
-			<AddressForm
-				id="billing"
-				type="billing"
-				onChange={ ( values: Partial< BillingAddress > ) => {
-					setBillingAddress( values );
-					dispatchCheckoutEvent( 'set-billing-address' );
-				} }
-				values={ billingAddress }
-				fields={
-					Object.keys(
-						defaultAddressFields
-					) as ( keyof AddressFields )[]
-				}
-				fieldConfig={ addressFieldsConfig }
-			/>
-			{ showPhoneField && (
-				<PhoneNumber
-					isRequired={ requirePhoneField }
-					value={ billingAddress.phone }
-					onChange={ ( value ) => {
-						setBillingPhone( value );
-						dispatchCheckoutEvent( 'set-phone-number', {
-							step: 'billing',
-						} );
+	if ( localPickupIsSelected ) {
+		return (
+			<AddressFormWrapperComponent>
+				<AddressForm
+					id="billing"
+					type="billing"
+					onChange={ ( values: Partial< BillingAddress > ) => {
+						setBillingAddress( values );
+						dispatchCheckoutEvent( 'set-billing-address' );
 					} }
+					values={ billingAddress }
+					fields={
+						Object.keys(
+							defaultAddressFields
+						) as ( keyof AddressFields )[]
+					}
+					fieldConfig={ addressFieldsConfig }
 				/>
-			) }
-		</AddressFormWrapperComponent>
-	);
+				{ showPhoneField && (
+					<PhoneNumber
+						isRequired={ requirePhoneField }
+						value={ billingAddress.phone }
+						onChange={ ( value ) => {
+							setBillingPhone( value );
+							dispatchCheckoutEvent( 'set-phone-number', {
+								step: 'billing',
+							} );
+						} }
+					/>
+				) }
+			</AddressFormWrapperComponent>
+		);
+	}
+
+	if ( ! localPickupIsSelected ) {
+		return <p>You selected not billing</p>;
+	}
 };
 
 export default Block;
