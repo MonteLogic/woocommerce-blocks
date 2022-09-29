@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { useShippingData } from '@woocommerce/base-context/hooks';
 import { __ } from '@wordpress/i18n';
 import { useMemo, useEffect, Fragment, useState } from '@wordpress/element';
 import { AddressForm } from '@woocommerce/base-components/cart-checkout';
@@ -88,6 +89,11 @@ const Block = ( {
 	] ) as Record< keyof AddressFields, Partial< AddressField > >;
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
+	const isPickup = useShippingData().selectedRates[ 0 ];
+
+	if ( isPickup === 'local_pickup:5' ) {
+		return <p>You have selected Local Pickup</p>;
+	}
 
 	return (
 		<>
