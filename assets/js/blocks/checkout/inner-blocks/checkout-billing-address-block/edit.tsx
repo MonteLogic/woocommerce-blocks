@@ -3,7 +3,7 @@
  */
 import classnames from 'classnames';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useCheckoutAddress } from '@woocommerce/base-context/hooks';
+import { useShippingData } from '@woocommerce/base-context/hooks';
 import { innerBlockAreas } from '@woocommerce/blocks-checkout';
 
 /**
@@ -41,32 +41,37 @@ export const Edit = ( {
 	} = useCheckoutBlockContext();
 	const { addressFieldControls: Controls } =
 		useCheckoutBlockControlsContext();
-	const { showBillingFields } = useCheckoutAddress();
 
-	if ( ! showBillingFields ) {
-		return null;
+	const isPickup = useShippingData().selectedRates[ 0 ];
+
+	if ( isPickup === 'local_pickup:5' ) {
+		return (
+			<FormStepBlock
+				setAttributes={ setAttributes }
+				attributes={ attributes }
+				className={ classnames(
+					'wc-block-checkout__billing-fields',
+					attributes?.className
+				) }
+			>
+				<Controls />
+				<Block
+					showCompanyField={ showCompanyField }
+					showApartmentField={ showApartmentField }
+					requireCompanyField={ requireCompanyField }
+					showPhoneField={ showPhoneField }
+					requirePhoneField={ requirePhoneField }
+				/>
+				<AdditionalFields block={ innerBlockAreas.BILLING_ADDRESS } />
+			</FormStepBlock>
+		);
 	}
 
-	return (
-		<FormStepBlock
-			setAttributes={ setAttributes }
-			attributes={ attributes }
-			className={ classnames(
-				'wc-block-checkout__billing-fields',
-				attributes?.className
-			) }
-		>
-			<Controls />
-			<Block
-				showCompanyField={ showCompanyField }
-				showApartmentField={ showApartmentField }
-				requireCompanyField={ requireCompanyField }
-				showPhoneField={ showPhoneField }
-				requirePhoneField={ requirePhoneField }
-			/>
-			<AdditionalFields block={ innerBlockAreas.BILLING_ADDRESS } />
-		</FormStepBlock>
-	);
+	// if ( !showBillingFields ) {
+	//    return null;
+	//}
+
+	return <p></p>;
 };
 
 export const Save = (): JSX.Element => {

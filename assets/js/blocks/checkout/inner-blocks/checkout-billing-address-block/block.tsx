@@ -7,6 +7,7 @@ import {
 	useStoreEvents,
 	useEditorContext,
 } from '@woocommerce/base-context';
+import { useShippingData } from '@woocommerce/base-context/hooks';
 import { AddressForm } from '@woocommerce/base-components/cart-checkout';
 import Noninteractive from '@woocommerce/base-components/noninteractive';
 import type {
@@ -66,9 +67,9 @@ const Block = ( {
 	] ) as Record< keyof AddressFields, Partial< AddressField > >;
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
-	const localPickupIsSelected = false;
+	const isPickup = useShippingData().selectedRates[ 0 ];
 
-	if ( localPickupIsSelected ) {
+	if ( isPickup === 'local_pickup:5' ) {
 		return (
 			<AddressFormWrapperComponent>
 				<AddressForm
@@ -101,10 +102,7 @@ const Block = ( {
 			</AddressFormWrapperComponent>
 		);
 	}
-
-	if ( ! localPickupIsSelected ) {
-		return <p>You selected not billing</p>;
-	}
+	return <p></p>;
 };
 
 export default Block;
