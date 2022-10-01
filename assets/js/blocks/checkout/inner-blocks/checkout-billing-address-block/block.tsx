@@ -7,7 +7,6 @@ import {
 	useStoreEvents,
 	useEditorContext,
 } from '@woocommerce/base-context';
-import { useShippingData } from '@woocommerce/base-context/hooks';
 import { AddressForm } from '@woocommerce/base-components/cart-checkout';
 import Noninteractive from '@woocommerce/base-components/noninteractive';
 import type {
@@ -67,42 +66,38 @@ const Block = ( {
 	] ) as Record< keyof AddressFields, Partial< AddressField > >;
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
-	const isPickup = useShippingData().selectedRates[ 0 ];
 
-	if ( isPickup === 'local_pickup:5' ) {
-		return (
-			<AddressFormWrapperComponent>
-				<AddressForm
-					id="billing"
-					type="billing"
-					onChange={ ( values: Partial< BillingAddress > ) => {
-						setBillingAddress( values );
-						dispatchCheckoutEvent( 'set-billing-address' );
+	return (
+		<AddressFormWrapperComponent>
+			<AddressForm
+				id="billing"
+				type="billing"
+				onChange={ ( values: Partial< BillingAddress > ) => {
+					setBillingAddress( values );
+					dispatchCheckoutEvent( 'set-billing-address' );
+				} }
+				values={ billingAddress }
+				fields={
+					Object.keys(
+						defaultAddressFields
+					) as ( keyof AddressFields )[]
+				}
+				fieldConfig={ addressFieldsConfig }
+			/>
+			{ showPhoneField && (
+				<PhoneNumber
+					isRequired={ requirePhoneField }
+					value={ billingAddress.phone }
+					onChange={ ( value ) => {
+						setBillingPhone( value );
+						dispatchCheckoutEvent( 'set-phone-number', {
+							step: 'billing',
+						} );
 					} }
-					values={ billingAddress }
-					fields={
-						Object.keys(
-							defaultAddressFields
-						) as ( keyof AddressFields )[]
-					}
-					fieldConfig={ addressFieldsConfig }
 				/>
-				{ showPhoneField && (
-					<PhoneNumber
-						isRequired={ requirePhoneField }
-						value={ billingAddress.phone }
-						onChange={ ( value ) => {
-							setBillingPhone( value );
-							dispatchCheckoutEvent( 'set-phone-number', {
-								step: 'billing',
-							} );
-						} }
-					/>
-				) }
-			</AddressFormWrapperComponent>
-		);
-	}
-	return <p></p>;
+			) }
+		</AddressFormWrapperComponent>
+	);
 };
 
 export default Block;
