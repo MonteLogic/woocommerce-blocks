@@ -22,6 +22,7 @@ class AllProducts extends AbstractBlock {
 	protected function enqueue_data( array $attributes = [] ) {
 		parent::enqueue_data( $attributes );
 		// Set this so filter blocks being used as widgets know when to render.
+		// The below line is crucial but why and how? 
 		$this->asset_data_registry->add( 'has_filterable_products', true, true );
 
 		$this->asset_data_registry->add( 'min_columns', wc_get_theme_support( 'product_blocks::min_columns', 1 ), true );

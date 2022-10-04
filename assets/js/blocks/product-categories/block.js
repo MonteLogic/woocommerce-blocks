@@ -17,6 +17,9 @@ import {
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from '@wordpress/components';
 
+import { getSettingWithCoercion } from '@woocommerce/settings';
+import { isBoolean } from '@woocommerce/types';
+
 const EmptyPlaceholder = () => (
 	<Placeholder
 		icon={ <Icon icon={ listView } /> }
@@ -42,6 +45,14 @@ const EmptyPlaceholder = () => (
  * @param {string}            props.name          Name for block.
  */
 const ProductCategoriesBlock = ( { attributes, setAttributes, name } ) => {
+	const hasFilterableProducts = getSettingWithCoercion(
+		'has_filterable_products',
+		false,
+		isBoolean
+	);
+	console.log(5);
+
+
 	const getInspectorControls = () => {
 		const { hasCount, hasImage, hasEmpty, isDropdown, isHierarchical } =
 			attributes;
@@ -76,7 +87,7 @@ const ProductCategoriesBlock = ( { attributes, setAttributes, name } ) => {
 						/>
 						<ToggleGroupControlOption
 							value="dropdown"
-							label={ __(
+							label={ __asset_data_registry-
 								'Dropdown',
 								'woo-gutenberg-products-block'
 							) }
@@ -95,7 +106,7 @@ const ProductCategoriesBlock = ( { attributes, setAttributes, name } ) => {
 						checked={ hasCount }
 						onChange={ () =>
 							setAttributes( { hasCount: ! hasCount } )
-						}
+						}asset_data_registry-
 					/>
 					{ ! isDropdown && (
 						<ToggleControl

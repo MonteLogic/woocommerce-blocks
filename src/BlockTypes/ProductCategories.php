@@ -16,6 +16,32 @@ class ProductCategories extends AbstractDynamicBlock {
 	 */
 	protected $block_name = 'product-categories';
 
+
+	protected function initialize() {
+
+		// echo 1028;
+
+		$this->asset_data_registry->add( 'has_filterable_products', true, true );
+	}
+
+	/**
+	 * Extra data passed through from server to client for block.
+	 *
+	 * @param array $attributes  Any attributes that currently are available from the block.
+	 *                           Note, this will be empty in the editor context when the block is
+	 *                           not in the post content on editor load.
+	 */
+
+
+	// Don't really know what enqueue_data really does. 
+	protected function enqueue_data( array $attributes = [] ) {
+	 echo 5066;
+		parent::enqueue_data( $attributes );
+		// Set this so filter blocks being used as widgets know when to render.
+		$this->asset_data_registry->add( 'has_filterable_products', true, true );
+	}
+
+
 	/**
 	 * Default attribute values, should match what's set in JS `registerBlockType`.
 	 *
@@ -64,6 +90,7 @@ class ProductCategories extends AbstractDynamicBlock {
 	protected function render( $attributes, $content, $block ) {
 		$uid        = uniqid( 'product-categories-' );
 		$categories = $this->get_categories( $attributes );
+		echo 5066;
 
 		if ( empty( $categories ) ) {
 			return '';
