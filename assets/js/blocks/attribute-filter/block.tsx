@@ -59,6 +59,10 @@ import {
 import { BlockAttributes, DisplayOption } from './types';
 import CheckboxFilter from './checkbox-filter';
 
+
+import { useStoreProducts } from '@woocommerce/base-context/hooks';
+
+
 /**
  * Formats filter values into a string for the URL parameters needed for filtering PHP templates.
  *
@@ -108,10 +112,13 @@ const AttributeFilterBlock = ( {
 			? previewAttributeObject
 			: getAttributeFromID( blockAttributes.attributeId );
 
+
+
 	const initialFilters = useMemo(
 		() => getActiveFilters( attributeObject ),
 		[ attributeObject ]
 	);
+	// console.log(initialFilters);
 
 	const [ checked, setChecked ] = useState( initialFilters );
 
@@ -136,14 +143,28 @@ const AttributeFilterBlock = ( {
 	const [ productAttributesQuery, setProductAttributesQuery ] =
 		useQueryStateByKey( 'attributes', [] );
 
+	
+	//	attributeTerms is declared here. 
 	const { results: attributeTerms, isLoading: attributeTermsLoading } =
 		useCollection( {
+			// We know that results are unknown and isLoading is a boolean.
+			// So I'm guessing the attributeTerms are results returned from
+			// the useCollection object. 
+
 			namespace: '/wc/store/v1',
 			resourceName: 'products/attributes/terms',
-			resourceValues: [ attributeObject?.id || 0 ],
+			// What is the attributeObject
+			resourceValues: [6],
 			shouldSelect: blockAttributes.attributeId > 0,
 		} );
 
+		const { products, totalProducts, productsLoading } =
+		useStoreProducts( queryState );
+
+		console.log(products);
+
+
+	// Why use the below two consts?
 	const filterAvailableTerms =
 		blockAttributes.displayStyle !== 'dropdown' &&
 		blockAttributes.queryType === 'and';
@@ -177,6 +198,9 @@ const AttributeFilterBlock = ( {
 		[ filteredCounts ]
 	);
 
+	// This appears to output a function. 
+	// console.log(getFilteredTerm);
+
 	/**
 	 * Compare intersection of all terms and filtered counts to get a list of options to display.
 	 */
@@ -205,8 +229,20 @@ const AttributeFilterBlock = ( {
 			return;
 		}
 
+
 		const newOptions = attributeTerms
+			// This is a map function which is pretty much a loop function. 
+			// What is the term param/var?
 			.map( ( term ) => {
+				// This outputs an object such as:
+				//	Object { id: 43, name: "Blue", slug: "blue", description: "", parent: 0, count: 30 }			​
+				// I think term may be a value of attributeTerms. 
+				// It appears term is just a 'leapfrog' var.
+
+
+
+
+
 				const filteredTerm = getFilteredTerm( term.id );
 
 				// If there is no match this term doesn't match the current product collection - only render if checked.
@@ -218,6 +254,7 @@ const AttributeFilterBlock = ( {
 					return null;
 				}
 
+				// THIS is the number which is being displayed. 
 				const count = filteredTerm ? filteredTerm.count : 0;
 
 				return {
@@ -227,6 +264,9 @@ const AttributeFilterBlock = ( {
 					label: (
 						<Label
 							name={ decodeEntities( term.name ) }
+							// Okay, so the line below is what shows the count of each arrtibute.
+							// showCounts is a boolean, if it evaluates false then the component 
+							// is going to output the count variable. 
 							count={ blockAttributes.showCounts ? count : null }
 						/>
 					),
