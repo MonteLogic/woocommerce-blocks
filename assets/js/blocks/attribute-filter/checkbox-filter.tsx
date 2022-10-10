@@ -15,11 +15,13 @@ interface CheckboxFilterProps {
 	checked?: string[];
 	onChange: ( value: string ) => void;
 	options?: DisplayOption[];
+	customOptions?: DisplayOption[];
 }
 
 const CheckboxFilter = ( {
 	isLoading = false,
 	options,
+	customOptions,
 	checked,
 	onChange,
 }: CheckboxFilterProps ) => {
@@ -36,7 +38,8 @@ const CheckboxFilter = ( {
 		<CheckboxList
 			className="wc-block-attribute-filter-list"
 			options={ options }
-			checked={ checked }
+			customOptions={ customOptions }
+			//checked={ checked }
 			onChange={ onChange }
 			isLoading={ isLoading }
 			isDisabled={ isLoading }

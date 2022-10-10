@@ -129,6 +129,7 @@ const AttributeFilterBlock = ( {
 	 */
 	const [ remountKey, setRemountKey ] = useState( generateUniqueId() );
 
+
 	const [ displayedOptions, setDisplayedOptions ] = useState<
 		DisplayOption[]
 	>(
@@ -143,6 +144,21 @@ const AttributeFilterBlock = ( {
 	const [ productAttributesQuery, setProductAttributesQuery ] =
 		useQueryStateByKey( 'attributes', [] );
 
+		// This is where the products ON screen are queried and logged. 
+	const { products, totalProducts, productsLoading } =
+	useStoreProducts( queryState );
+
+	console.log(products);
+	//console.log(totalProducts);
+
+	const [ customOptions ] = products;
+
+
+
+
+
+
+
 	
 	//	attributeTerms is declared here. 
 	const { results: attributeTerms, isLoading: attributeTermsLoading } =
@@ -154,14 +170,11 @@ const AttributeFilterBlock = ( {
 			namespace: '/wc/store/v1',
 			resourceName: 'products/attributes/terms',
 			// What is the attributeObject
-			resourceValues: [6],
+			resourceValues: [ attributeObject?.id || 0 ],
 			shouldSelect: blockAttributes.attributeId > 0,
 		} );
 
-		const { products, totalProducts, productsLoading } =
-		useStoreProducts( queryState );
 
-		console.log(products);
 
 
 	// Why use the below two consts?
@@ -244,6 +257,15 @@ const AttributeFilterBlock = ( {
 
 
 				const filteredTerm = getFilteredTerm( term.id );
+				//console.log(filteredTerm);
+				// Outputs:
+				// Object { term: 225, count: 2 }
+				// So I guess term is a number which correlates to an attribute name.
+				// console.log(term.slug);
+
+
+				
+				console.log( isTermInQueryState( term.slug ));
 
 				// If there is no match this term doesn't match the current product collection - only render if checked.
 				if (
@@ -683,6 +705,7 @@ const AttributeFilterBlock = ( {
 						) }
 					</>
 				) : (
+					// If this is commented out the filters won't load. 
 					<CheckboxFilter
 						options={ displayedOptions }
 						checked={ checked }
@@ -690,8 +713,37 @@ const AttributeFilterBlock = ( {
 						isLoading={ isLoading }
 						isDisabled={ isLoading }
 					/>
-				) }
+				)
+				
+				
+				
+				}
 			</div>
+			<div className='second-filter-block'> 
+				<div>Start block which shows data of products on screen.</div>
+
+					<CheckboxFilter
+					// Okay, so I have to work on 
+					// my own displayedOptions.
+					// When I comment 
+						options={ displayedOptions }
+						checked={ checked }
+						onChange={ onChange }
+						isLoading={ isLoading }
+						isDisabled={ isLoading }
+					/>
+
+			</div>
+
+
+
+
+
+
+
+
+
+
 
 			<div className="wc-block-attribute-filter__actions">
 				{ checked.length > 0 && ! isLoading && (

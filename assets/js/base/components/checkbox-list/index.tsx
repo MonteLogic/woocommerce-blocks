@@ -23,7 +23,8 @@ interface CheckboxListProps {
 	limit?: number;
 	checked?: string[];
 	onChange: ( value: string ) => void;
-	options?: CheckboxListOptions[];
+	options?: CheckboxListOptions[] | undefined;
+	customOptions?: CheckboxListOptions[] | undefined;
 }
 
 /**
@@ -42,6 +43,7 @@ const CheckboxList = ( {
 	className,
 	onChange,
 	options = [],
+	customOptions = [],
 	checked = [],
 	isLoading = false,
 	isDisabled = false,
@@ -153,6 +155,7 @@ const CheckboxList = ( {
 		);
 	}, [
 		options,
+		customOptions,
 		onChange,
 		checked,
 		showExpanded,
