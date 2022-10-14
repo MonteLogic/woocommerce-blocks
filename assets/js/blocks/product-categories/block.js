@@ -87,7 +87,7 @@ const ProductCategoriesBlock = ( { attributes, setAttributes, name } ) => {
 						/>
 						<ToggleGroupControlOption
 							value="dropdown"
-							label={ __asset_data_registry-
+							label={__(
 								'Dropdown',
 								'woo-gutenberg-products-block'
 							) }
