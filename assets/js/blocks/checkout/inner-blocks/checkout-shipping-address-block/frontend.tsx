@@ -6,6 +6,8 @@ import { withFilteredAttributes } from '@woocommerce/shared-hocs';
 import { FormStep } from '@woocommerce/base-components/cart-checkout';
 import { useCheckoutContext } from '@woocommerce/base-context';
 import { useCheckoutAddress } from '@woocommerce/base-context/hooks';
+import { CheckboxControl } from '@wordpress/components';
+
 
 /**
  * Internal dependencies
@@ -13,6 +15,7 @@ import { useCheckoutAddress } from '@woocommerce/base-context/hooks';
 import Block from './block';
 import attributes from './attributes';
 import { useCheckoutBlockContext } from '../../context';
+import { __ } from '@wordpress/i18n';
 
 const FrontendBlock = ( {
 	title,
@@ -40,6 +43,9 @@ const FrontendBlock = ( {
 	if ( ! showShippingFields ) {
 		return null;
 	}
+	const toggleAttribute = () => {
+		console.log(5);
+	} ;
 
 	return (
 		<FormStep
@@ -53,6 +59,20 @@ const FrontendBlock = ( {
 			description={ description }
 			showStepNumber={ showStepNumber }
 		>
+			<CheckboxControl
+			
+			label={ __(
+				'Local Pickup?',
+				'woo-gutenberg-products-block'
+			) }
+			checked={ true }
+			onChange={ () =>
+			    toggleAttribute( )
+			}
+			className="components-base-control--nested"	
+			
+			/>
+
 			<Block
 				requireCompanyField={ requireCompanyField }
 				requirePhoneField={ requirePhoneField }
