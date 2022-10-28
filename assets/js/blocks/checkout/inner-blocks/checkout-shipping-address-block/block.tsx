@@ -8,6 +8,7 @@ import {
 	useCheckoutAddress,
 	useStoreEvents,
 	useEditorContext,
+	useStoreCart
 } from '@woocommerce/base-context';
 import { CheckboxControl } from '@woocommerce/blocks-checkout';
 import Noninteractive from '@woocommerce/base-components/noninteractive';
@@ -88,6 +89,60 @@ const Block = ( {
 	] ) as Record< keyof AddressFields, Partial< AddressField > >;
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
+	console.log(useShippingAsBilling);
+
+	const {
+		shippingRates,
+	} = useStoreCart();
+	console.log(shippingRates);
+	
+	
+	
+	// So I guess shippingRates is an array. 
+	
+	// Looking for method_id 
+	const selectedShippingRates = shippingRates.flatMap(
+		( shippingPackage ) => {
+			return shippingPackage.shipping_rates
+				.filter( ( rate ) => rate.selected )
+				.flatMap( ( rate ) => rate.method_id );
+		}
+	);
+	// Looking for method_id 
+
+
+
+	console.log(selectedShippingRates[0]);
+
+    if(selectedShippingRates[0] == "local_pickup"){
+        setUseShippingAsBilling( false );
+	      return (
+		        <>
+		           <p>You have selected Local Pickup your order will be at the Matlack HQ</p>
+		        </>
+		)
+		// Local pickup has been selected. 
+		// return null;
+	}
+
+
+
+
+
+
+
+
+	// const var5 =5 ;
+	// if(var5 == 5){
+
+	//   setUseShippingAsBilling( false );
+	// 	return (
+	// 	<>
+	// 	<p>You have selected Local Pickup your order will be at the Matlack HQ</p>
+	// 	</>
+	// 	);
+
+	// }
 
 	return (
 		<>
@@ -130,6 +185,9 @@ const Block = ( {
 					'Use same address for billing',
 					'woo-gutenberg-products-block'
 				) }
+				// I may have to add another qualifer here: such as LocalPickup selected or similar var for showing Pickup. 
+				// or I could have something like:
+				// isPickupSelected = {pickupIsSelectedVar}
 				checked={ useShippingAsBilling }
 				onChange={ ( checked: boolean ) => {
 					setUseShippingAsBilling( checked );

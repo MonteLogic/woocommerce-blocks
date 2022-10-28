@@ -39,31 +39,34 @@ const FrontendBlock = ( {
 		showPhoneField,
 	} = useCheckoutBlockContext();
 	const { showBillingFields, forcedBillingAddress } = useCheckoutAddress();
-	const {
-		shippingAddress,
-		cartHasCalculatedShipping,
-		shippingRates,
-		isLoadingRates,
-	} = useStoreCart();
-	console.log(shippingRates);
+
+	// const {
+	// 	shippingRates,
+	// } = useStoreCart();
+	// console.log(shippingRates);
 	
 	
 	
-	// So I guess shippingRates is an array. 
+	// // So I guess shippingRates is an array. 
 	
-	// This widdles it down = 
-	const selectedShippingRates = shippingRates.flatMap(
-		( shippingPackage ) => {
-			return shippingPackage.shipping_rates
-				.filter( ( rate ) => rate.selected )
-				.flatMap( ( rate ) => rate.method_id );
-		}
-	);
-	// Looking for method_id 
+	// // Looking for method_id 
+	// const selectedShippingRates = shippingRates.flatMap(
+	// 	( shippingPackage ) => {
+	// 		return shippingPackage.shipping_rates
+	// 			.filter( ( rate ) => rate.selected )
+	// 			.flatMap( ( rate ) => rate.method_id );
+	// 	}
+	// );
+	// // Looking for method_id 
 
 
 
-	console.log(selectedShippingRates);
+	// console.log(selectedShippingRates[0]);
+
+	// if(selectedShippingRates[0] == "local_pickup"){
+	// 	// Local pickup has been selected. 
+	// 	return null;
+	// }
 
 
 
