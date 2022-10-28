@@ -4,7 +4,7 @@
 import classnames from 'classnames';
 import { withFilteredAttributes } from '@woocommerce/shared-hocs';
 import { FormStep } from '@woocommerce/base-components/cart-checkout';
-import { useCheckoutAddress } from '@woocommerce/base-context/hooks';
+import { useCheckoutAddress, useStoreCart } from '@woocommerce/base-context/hooks';
 import { useSelect } from '@wordpress/data';
 import { CHECKOUT_STORE_KEY } from '@woocommerce/block-data';
 
@@ -39,6 +39,36 @@ const FrontendBlock = ( {
 		showPhoneField,
 	} = useCheckoutBlockContext();
 	const { showBillingFields, forcedBillingAddress } = useCheckoutAddress();
+	const {
+		shippingAddress,
+		cartHasCalculatedShipping,
+		shippingRates,
+		isLoadingRates,
+	} = useStoreCart();
+	console.log(shippingRates);
+	
+	
+	
+	// So I guess shippingRates is an array. 
+	
+	// This widdles it down = 
+	const selectedShippingRates = shippingRates.flatMap(
+		( shippingPackage ) => {
+			return shippingPackage.shipping_rates
+				.filter( ( rate ) => rate.selected )
+				.flatMap( ( rate ) => rate.method_id );
+		}
+	);
+	// Looking for method_id 
+
+
+
+	console.log(selectedShippingRates);
+
+
+
+
+
 
 	if ( ! showBillingFields && ! forcedBillingAddress ) {
 		return null;

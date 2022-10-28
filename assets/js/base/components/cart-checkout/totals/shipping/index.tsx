@@ -146,8 +146,7 @@ export const TotalsShipping = ( {
 	const totalShippingValue = getSetting(
 		'displayCartPricesIncludingTax',
 		false
-	)
-		? parseInt( values.total_shipping, 10 ) +
+	)  ? parseInt( values.total_shipping, 10 ) +
 		  parseInt( values.total_shipping_tax, 10 )
 		: parseInt( values.total_shipping, 10 );
 	const hasRates = hasShippingRate( shippingRates ) || totalShippingValue;
