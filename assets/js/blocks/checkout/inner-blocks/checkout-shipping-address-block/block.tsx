@@ -119,6 +119,19 @@ const Block = ( {
 	      return (
 		        <>
 		           <p>You have selected Local Pickup your order will be at the Matlack HQ</p>
+				   <PhoneNumber
+						id="shipping-phone"
+						isRequired={ requirePhoneField }
+						value={ shippingAddress.phone }
+						onChange={ ( value ) => {
+							console.log("changed");
+							console.log(shippingAddress.phone);
+							setShippingPhone( value );
+							dispatchCheckoutEvent( 'set-phone-number', {
+								step: 'shipping',
+							} );
+						} }
+					/>
 		        </>
 		)
 		// Local pickup has been selected. 
@@ -126,23 +139,6 @@ const Block = ( {
 	}
 
 
-
-
-
-
-
-
-	// const var5 =5 ;
-	// if(var5 == 5){
-
-	//   setUseShippingAsBilling( false );
-	// 	return (
-	// 	<>
-	// 	<p>You have selected Local Pickup your order will be at the Matlack HQ</p>
-	// 	</>
-	// 	);
-
-	// }
 
 	return (
 		<>

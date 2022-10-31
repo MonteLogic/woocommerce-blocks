@@ -109,7 +109,8 @@ class BillingAddressSchema extends AbstractAddressSchema {
 					'postcode'   => $address->get_billing_postcode(),
 					'country'    => $billing_country,
 					'email'      => $address->get_billing_email(),
-					'phone'      => $address->get_billing_phone(),
+					'phone'      => "yeet8",
+					'phone2'      => "yeet10",
 				]
 			);
 		}
