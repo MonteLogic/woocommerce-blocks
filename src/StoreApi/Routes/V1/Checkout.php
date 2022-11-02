@@ -132,6 +132,9 @@ class Checkout extends AbstractCartRoute {
 	 */
 	protected function get_route_response( \WP_REST_Request $request ) {
 		$this->create_or_update_draft_order( $request );
+		echo 5060;
+		echo $order;
+		echo $order;
 
 		return $this->prepare_item_for_response(
 			(object) [
@@ -307,7 +310,23 @@ class Checkout extends AbstractCartRoute {
 	 * @throws RouteException On error.
 	 */
 	private function create_or_update_draft_order( \WP_REST_Request $request ) {
-		$this->order = $this->get_draft_order();
+
+		// I would like to add onto this $order object so you can access a custom value from a field. 
+		// Then that can then be piped into the custom settings. 
+		// var_dump($this->order);
+		// $this->order->yeet = "Yeeted";
+		// echo 5055;
+		// echo "<br>";
+		// echo $order;
+		// $this->order = $this->get_draft_order();
+		// echo "<br>";
+		// echo $this->order->id;
+		// echo "<br>";
+
+		// update_post_meta( $this->order->id, 'Yeetness Report', "yeet From That 326" );
+
+
+
 
 		if ( ! $this->order ) {
 			$this->order = $this->order_controller->create_order_from_cart();
@@ -351,6 +370,8 @@ class Checkout extends AbstractCartRoute {
 		 * @param \WC_Order $order Order object.
 		 */
 		do_action( 'woocommerce_store_api_checkout_update_order_meta', $this->order );
+
+		update_post_meta( $this->order->id, 'Yeetness Report', "yeet From That 326" );
 
 		// Confirm order is valid before proceeding further.
 		if ( ! $this->order instanceof \WC_Order ) {
@@ -452,6 +473,8 @@ class Checkout extends AbstractCartRoute {
 			'woocommerce_store_api_checkout_update_order_from_request',
 			'This action was deprecated in WooCommerce Blocks version 7.2.0. Please use woocommerce_store_api_checkout_update_order_from_request instead.'
 		);
+
+
 
 		/**
 		 * Fires when the Checkout Block/Store API updates an order's from the API request data.
