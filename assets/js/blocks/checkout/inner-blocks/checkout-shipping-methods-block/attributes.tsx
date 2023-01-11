@@ -17,6 +17,13 @@ export default {
 		type: 'string',
 		default: '',
 	},
+	localPickupString: {
+		type: 'string',
+		default:
+			'Enter here which place the Local Pickup order is going to go.',
+		edtiable: true,
+	},
+
 	lock: {
 		type: 'object',
 		default: {

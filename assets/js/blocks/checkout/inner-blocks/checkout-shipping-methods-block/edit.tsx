@@ -3,12 +3,16 @@
  */
 import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import {
+	InspectorControls,
+	useBlockProps,
+	PlainText,
+} from '@wordpress/block-editor';
 import { PanelBody, ExternalLink } from '@wordpress/components';
 import { ADMIN_URL, getSetting } from '@woocommerce/settings';
 import ExternalLinkCard from '@woocommerce/editor-components/external-link-card';
 import { innerBlockAreas } from '@woocommerce/blocks-checkout';
-import Noninteractive from '@woocommerce/base-components/noninteractive';
+// import Noninteractive from '@woocommerce/base-components/noninteractive';
 
 /**
  * Internal dependencies
@@ -35,6 +39,7 @@ export const Edit = ( {
 		description: string;
 		showStepNumber: boolean;
 		className: string;
+		localPickupString: string;
 	};
 	setAttributes: ( attributes: Record< string, unknown > ) => void;
 } ): JSX.Element => {
@@ -70,12 +75,30 @@ export const Edit = ( {
 						</p>
 						{ globalShippingMethods.map( ( method ) => {
 							return (
-								<ExternalLinkCard
-									key={ method.id }
-									href={ `${ ADMIN_URL }admin.php?page=wc-settings&tab=shipping&section=${ method.id }` }
-									title={ method.title }
-									description={ method.description }
-								/>
+								<>
+									<>
+										<ExternalLinkCard
+											key={ method.id }
+											href={ `${ ADMIN_URL }admin.php?page=wc-settings&tab=shipping&section=${ method.id }` }
+											title={ method.title }
+											description={ method.description }
+										/>
+										<h2>
+											Local Pickup delivery information:
+										</h2>
+										<PlainText
+											className={ '' }
+											value={
+												attributes.localPickupString
+											}
+											onChange={ ( value ) =>
+												setAttributes( {
+													localPickupString: value,
+												} )
+											}
+										/>
+									</>
+								</>
 							);
 						} ) }
 						<ExternalLink
@@ -119,9 +142,9 @@ export const Edit = ( {
 					</PanelBody>
 				) }
 			</InspectorControls>
-			<Noninteractive>
-				<Block />
-			</Noninteractive>
+			{ /* <Noninteractive> */ }
+			<Block /> <h2>Something - 5204</h2>
+			{ /* </Noninteractive> */ }
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_METHODS } />
 		</FormStepBlock>
 	);
