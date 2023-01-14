@@ -8,6 +8,8 @@ import { __ } from '@wordpress/i18n';
  */
 import formStepAttributes from '../../form-step/attributes';
 
+import checkoutShippingMethodsAttribute from '../checkout-shipping-methods-block/attributes';
+
 export default {
 	...formStepAttributes( {
 		defaultTitle: __( 'Shipping address', 'woo-gutenberg-products-block' ),
@@ -16,6 +18,7 @@ export default {
 			'woo-gutenberg-products-block'
 		),
 	} ),
+	...checkoutShippingMethodsAttribute,
 	className: {
 		type: 'string',
 		default: '',

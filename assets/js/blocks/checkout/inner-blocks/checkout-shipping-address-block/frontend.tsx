@@ -20,12 +20,14 @@ const FrontendBlock = ( {
 	showStepNumber,
 	children,
 	className,
+	localPickupString,
 }: {
 	title: string;
 	description: string;
 	showStepNumber: boolean;
 	children: JSX.Element;
 	className?: string;
+	localPickupString: string;
 } ) => {
 	const checkoutIsProcessing = useSelect( ( select ) =>
 		select( CHECKOUT_STORE_KEY ).isProcessing()
@@ -43,6 +45,11 @@ const FrontendBlock = ( {
 		return null;
 	}
 
+	// eslint-disable-next-line no-console
+	console.log( 1556 );
+	// eslint-disable-next-line no-console
+	console.log( localPickupString );
+
 	return (
 		<FormStep
 			id="shipping-fields"
@@ -56,11 +63,13 @@ const FrontendBlock = ( {
 			showStepNumber={ showStepNumber }
 		>
 			<Block
+				// There needs to be a param here to pass the editable string.
 				requireCompanyField={ requireCompanyField }
 				requirePhoneField={ requirePhoneField }
 				showApartmentField={ showApartmentField }
 				showCompanyField={ showCompanyField }
 				showPhoneField={ showPhoneField }
+				localPickupInfo={ localPickupString }
 			/>
 			{ children }
 		</FormStep>

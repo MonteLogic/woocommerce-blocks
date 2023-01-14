@@ -9,6 +9,7 @@ import {
 	useStoreEvents,
 	useEditorContext,
 	noticeContexts,
+	useStoreCart,
 } from '@woocommerce/base-context';
 import {
 	CheckboxControl,
@@ -33,12 +34,14 @@ const Block = ( {
 	showPhoneField = false,
 	requireCompanyField = false,
 	requirePhoneField = false,
+	localPickupInfo = '',
 }: {
 	showCompanyField: boolean;
 	showApartmentField: boolean;
 	showPhoneField: boolean;
 	requireCompanyField: boolean;
 	requirePhoneField: boolean;
+	localPickupInfo: string;
 } ): JSX.Element => {
 	const {
 		defaultAddressFields,
@@ -97,6 +100,42 @@ const Block = ( {
 	] ) as Record< keyof AddressFields, Partial< AddressField > >;
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
+
+	/*
+	  Start MoL Codeblock
+	*/
+
+	const { shippingRates } = useStoreCart();
+
+	// eslint-disable-next-line no-console
+	console.log( shippingRates );
+	// So I guess shippingRates is an array.
+	// Looking for method_id
+	const selectedShippingRates = shippingRates.flatMap(
+		( shippingPackage ) => {
+			return shippingPackage.shipping_rates
+				.filter( ( rate ) => rate.selected )
+				.flatMap( ( rate ) => rate.method_id );
+		}
+	);
+
+	// eslint-disable-next-line no-console
+	console.log( selectedShippingRates[ 0 ] );
+	if ( selectedShippingRates[ 0 ] === 'local_pickup' ) {
+		setUseShippingAsBilling( false );
+		return (
+			<>
+				<p>
+					{ localPickupInfo }
+					You have selected Local Pickup your order will be at the
+					Matlack HQ
+				</p>
+			</>
+		);
+	}
+	/*
+	  End MoL Codeblock
+	*/
 
 	return (
 		<>
