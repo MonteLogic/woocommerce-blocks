@@ -23,6 +23,8 @@ import type {
 	AddressFields,
 } from '@woocommerce/settings';
 
+// import { useEffect, useState } from '@wordpress/element';
+
 /**
  * Internal dependencies
  */
@@ -42,6 +44,7 @@ const Block = ( {
 	requireCompanyField: boolean;
 	requirePhoneField: boolean;
 	localPickupInfo: string;
+
 } ): JSX.Element => {
 	const {
 		defaultAddressFields,
@@ -58,6 +61,9 @@ const Block = ( {
 	// This is used to track whether the "Use shipping as billing" checkbox was checked on first load and if we synced
 	// the shipping address to the billing address if it was. This is not used on further toggles of the checkbox.
 	const [ addressesSynced, setAddressesSynced ] = useState( false );
+
+
+	// Store selected rate ID in local state so shipping rates changes are shown in the UI instantly.
 
 	// Clears data if fields are hidden.
 	useEffect( () => {
@@ -100,6 +106,14 @@ const Block = ( {
 	] ) as Record< keyof AddressFields, Partial< AddressField > >;
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
+	if ( isEditor ) {
+		// eslint-disable-next-line no-console
+		console.log( 'On the editor' );
+		// eslint-disable-next-line no-console
+		console.log(
+			'I would like to have state actions here. Which would then be an attribute(?), additional state.'
+		);
+	}
 
 	/*
 	  Start MoL Codeblock
@@ -125,11 +139,7 @@ const Block = ( {
 		setUseShippingAsBilling( false );
 		return (
 			<>
-				<p>
-					{ localPickupInfo }
-					You have selected Local Pickup your order will be at the
-					Matlack HQ
-				</p>
+				<p>{ localPickupInfo }</p>
 			</>
 		);
 	}

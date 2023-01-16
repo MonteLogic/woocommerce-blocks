@@ -17,12 +17,15 @@ import type {
 	PackageRateOption,
 	CartShippingPackageShippingRate,
 } from '@woocommerce/types';
+import { useState } from '@wordpress/element';
+import RadioControl from '@woocommerce/base-components/radio-control';
 
 /**
  * Internal dependencies
  */
 import NoShippingPlaceholder from './no-shipping-placeholder';
 import './style.scss';
+// import ShippingRateSelector from '@woocommerce/base-components/cart-checkout/totals/shipping/shipping-rate-selector';
 
 /**
  * Renders a shipping rate control option.
@@ -49,8 +52,29 @@ const renderShippingRatesControlOption = (
 	};
 };
 
-const Block = (): JSX.Element | null => {
+const Block = (
+	selectedRate: CartShippingPackageShippingRate | undefined
+): JSX.Element | null => {
+	// I need to bring in state from the shipping methods block.
+
+	const selectedRateId = selectedRate?.rate_id || '';
+
 	const { isEditor } = useEditorContext();
+	const [ isLocalPickupSelected, setLocalPickupSelected ] = useState( false );
+	// I need to figure out a way to tell if the radio option has been chosen to what value from THIS file.
+
+	const options = {
+		value1: {
+			value: 'value1',
+			label: 'Label 1',
+			disabled: false,
+		},
+		value2: {
+			value: 'value2',
+			label: 'Label 2',
+			disabled: false,
+		},
+	};
 
 	const {
 		shippingRates,
@@ -81,11 +105,48 @@ const Block = (): JSX.Element | null => {
 		);
 	}
 
+	// Why don't I make a super dumb component here on the isEditor which will be easy to tell because at the end of the day it's already
+	// dummy text already.
+
+	// SO within the component there needs to be something in there which tells other componnets whom are viewing this component
+	// that the state is a certain way.
+
+	// It doesn't have to be the exact type just how it isn't named RadioControlOption throughout the
+	// file but the type is still used in other parts without the exact naming.
+
+	const optionsArray = Object.values( options ).map( ( option ) => ( {
+		...option,
+	} ) );
 	return (
 		<>
 			<StoreNoticesContainer
 				context={ noticeContexts.SHIPPING_METHODS }
 			/>
+
+			<RadioControl
+				selected={ '' }
+				onChange={ ( value: string ) => {
+					// eslint-disable-next-line no-console
+					console.log( value );
+				} }
+				// Within this attriubte needs to be the component RadioControlOption
+				options={ optionsArray }
+			/>
+			<br />
+			<br />
+			<br />
+
+			{ /* { isEditor && rates.length > 1 ? (
+				<RadioControl
+					selected={ '' }
+					onChange={ function ( value: string ): void {
+						throw new Error( 'Function not implemented.' );
+					} }
+					// Within this attriubte needs to be the component RadioControlOption
+					options={ [options] }
+				/>
+			) : null } */ }
+
 			{ isEditor && ! shippingRatesPackageCount ? (
 				<NoShippingPlaceholder />
 			) : (
