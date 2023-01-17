@@ -53,11 +53,15 @@ const renderShippingRatesControlOption = (
 };
 
 const Block = (
-	selectedRate: CartShippingPackageShippingRate | undefined
+	selectedRate: CartShippingPackageShippingRate | undefined,
+	onSelectRate: ( selectedRateId: string ) => void
 ): JSX.Element | null => {
 	// I need to bring in state from the shipping methods block.
 
 	const selectedRateId = selectedRate?.rate_id || '';
+
+	// Store selected rate ID in local state so shipping rates changes are shown in the UI instantly.
+	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
 
 	const { isEditor } = useEditorContext();
 	const [ isLocalPickupSelected, setLocalPickupSelected ] = useState( false );
@@ -124,10 +128,14 @@ const Block = (
 			/>
 
 			<RadioControl
-				selected={ '' }
+				selected={ selectedOption }
 				onChange={ ( value: string ) => {
 					// eslint-disable-next-line no-console
 					console.log( value );
+					setSelectedOption( value );
+					// I don't know what onSelectRate does but it doesn't
+					// seem to matter for what I am trying to do.
+					// onSelectRate( value );
 				} }
 				// Within this attriubte needs to be the component RadioControlOption
 				options={ optionsArray }
