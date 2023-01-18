@@ -76,6 +76,9 @@ const Block = ( {
 
 	const value = useContext( ValueContext );
 
+	// Okay now that I can read that value I can be like, if ValueContext is === true than don't render the shipping address section.
+	// only show the billing section.
+
 	// eslint-disable-next-line no-console
 	console.log( 'value = ' );
 	// eslint-disable-next-line no-console
@@ -137,7 +140,7 @@ const Block = ( {
 	}
 
 	/*
-	  Start MoL Codeblock
+	  Start MoL Codeblock - Part 1
 	*/
 
 	const { shippingRates } = useStoreCart();
@@ -165,9 +168,20 @@ const Block = ( {
 		);
 	}
 	/*
-	  End MoL Codeblock
+	  End MoL Codeblock - Part 1
 	*/
 
+	if ( value === true ) {
+		return <p> Local pickup is selected </p>;
+	}
+
+	/*
+	  Start MoL Codeblock - Part 2
+	*/
+
+	/*
+	  End MoL Codeblock - Part 2
+	*/
 	return (
 		<>
 			<AddressFormWrapperComponent>

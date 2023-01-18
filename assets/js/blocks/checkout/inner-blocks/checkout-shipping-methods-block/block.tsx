@@ -54,8 +54,7 @@ const renderShippingRatesControlOption = (
 export const ValueContext = createContext( false );
 
 const Block = (
-	selectedRate: CartShippingPackageShippingRate | undefined,
-	isLocalPickupSelected: false
+	selectedRate: CartShippingPackageShippingRate | undefined
 	// onSelectRate: ( selectedRateId: string ) => void
 ): JSX.Element | null => {
 	// I need to bring in state from the shipping methods block.
@@ -65,6 +64,9 @@ const Block = (
 	// Store selected rate ID in local state so shipping rates changes are shown in the UI instantly.
 	// I need to pass this selectedRateId into the shipping-address block.
 	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
+
+	const isLocalPickupSelected = false;
+	// const [ isLocalPickupSelected, setSelectedOption ] = useState( selectedRateId );
 
 	// I need to pass selectedOption here
 
@@ -90,7 +92,6 @@ const Block = (
 	// eslint-disable-next-line no-console
 	console.log( isLocalPickupSelected );
 
-	isLocalPickupSelected = false;
 	// eslint-disable-next-line no-console
 	console.log( 1580 );
 	// The following is returning undefined.
