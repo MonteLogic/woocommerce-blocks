@@ -49,6 +49,9 @@ const FrontendBlock = ( {
 	console.log( 1556 );
 	// eslint-disable-next-line no-console
 	console.log( localPickupString );
+	// eslint-disable-next-line no-console
+	console.log( requireCompanyField );
+	// eslint-disable-next-line no-console
 
 	return (
 		<FormStep

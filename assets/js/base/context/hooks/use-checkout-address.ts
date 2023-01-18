@@ -19,6 +19,7 @@ import { useCustomerData } from './use-customer-data';
 import { useShippingData } from './shipping/use-shipping-data';
 
 interface CheckoutAddress {
+	setEditorShippingMethodField: ( value: string ) => void;
 	shippingAddress: ShippingAddress;
 	billingAddress: BillingAddress;
 	setShippingAddress: ( data: Partial< ShippingAddress > ) => void;

@@ -43,6 +43,17 @@ export const useShippingDataContext = () => {
 	return useContext( ShippingDataContext );
 };
 
+/* start MoL Codeblock. */
+// Creating context for shipping methods.
+
+const shippingMethodsEditContext = createContext( 'value1' );
+
+export const useShippingMethodsEditContext = () => {
+	return useContext( shippingMethodsEditContext );
+};
+
+/*  End MoL Codeblock.*/
+
 /**
  * The shipping data provider exposes the interface for shipping in the checkout/cart.
  *

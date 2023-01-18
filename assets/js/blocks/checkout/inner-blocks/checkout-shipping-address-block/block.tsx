@@ -2,7 +2,13 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useMemo, useEffect, Fragment, useState } from '@wordpress/element';
+import {
+	useMemo,
+	useEffect,
+	Fragment,
+	useState,
+	useContext,
+} from '@wordpress/element';
 import { AddressForm } from '@woocommerce/base-components/cart-checkout';
 import {
 	useCheckoutAddress,
@@ -29,8 +35,11 @@ import type {
  * Internal dependencies
  */
 import PhoneNumber from '../../phone-number';
+import { ValueContext } from '../checkout-shipping-methods-block/block';
+// import ShippingMethods from '../checkout-shipping-methods-block/block';
 
 const Block = ( {
+	isLocalPickupSelected = false,
 	showCompanyField = false,
 	showApartmentField = false,
 	showPhoneField = false,
@@ -38,13 +47,13 @@ const Block = ( {
 	requirePhoneField = false,
 	localPickupInfo = '',
 }: {
+	isLocalPickupSelected: boolean;
 	showCompanyField: boolean;
 	showApartmentField: boolean;
 	showPhoneField: boolean;
 	requireCompanyField: boolean;
 	requirePhoneField: boolean;
 	localPickupInfo: string;
-
 } ): JSX.Element => {
 	const {
 		defaultAddressFields,
@@ -62,9 +71,19 @@ const Block = ( {
 	// the shipping address to the billing address if it was. This is not used on further toggles of the checkbox.
 	const [ addressesSynced, setAddressesSynced ] = useState( false );
 
-
+	// const value = useContext( ValueContext );
 	// Store selected rate ID in local state so shipping rates changes are shown in the UI instantly.
 
+	const value = useContext( ValueContext );
+
+	// eslint-disable-next-line no-console
+	console.log( 'value = ' );
+	// eslint-disable-next-line no-console
+	console.log( value );
+	// eslint-disable-next-line no-console
+	console.log( 1702 );
+	// eslint-disable-next-line no-console
+	console.log( isLocalPickupSelected );
 	// Clears data if fields are hidden.
 	useEffect( () => {
 		if ( ! showPhoneField ) {
@@ -107,12 +126,14 @@ const Block = ( {
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
 	if ( isEditor ) {
+		// Working on changing
 		// eslint-disable-next-line no-console
 		console.log( 'On the editor' );
 		// eslint-disable-next-line no-console
 		console.log(
 			'I would like to have state actions here. Which would then be an attribute(?), additional state.'
 		);
+		// I need to access the shipping-methods state here.
 	}
 
 	/*

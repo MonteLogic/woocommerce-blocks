@@ -17,7 +17,7 @@ import type {
 	PackageRateOption,
 	CartShippingPackageShippingRate,
 } from '@woocommerce/types';
-import { useState } from '@wordpress/element';
+import { createContext, useState } from '@wordpress/element';
 import RadioControl from '@woocommerce/base-components/radio-control';
 
 /**
@@ -25,8 +25,7 @@ import RadioControl from '@woocommerce/base-components/radio-control';
  */
 import NoShippingPlaceholder from './no-shipping-placeholder';
 import './style.scss';
-// import ShippingRateSelector from '@woocommerce/base-components/cart-checkout/totals/shipping/shipping-rate-selector';
-
+// import { useCheckoutBlockContext } from '../../context';
 /**
  * Renders a shipping rate control option.
  *
@@ -52,19 +51,25 @@ const renderShippingRatesControlOption = (
 	};
 };
 
+export const ValueContext = createContext( false );
+
 const Block = (
 	selectedRate: CartShippingPackageShippingRate | undefined,
-	onSelectRate: ( selectedRateId: string ) => void
+	isLocalPickupSelected: false
+	// onSelectRate: ( selectedRateId: string ) => void
 ): JSX.Element | null => {
 	// I need to bring in state from the shipping methods block.
 
 	const selectedRateId = selectedRate?.rate_id || '';
 
 	// Store selected rate ID in local state so shipping rates changes are shown in the UI instantly.
+	// I need to pass this selectedRateId into the shipping-address block.
 	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
 
+	// I need to pass selectedOption here
+
 	const { isEditor } = useEditorContext();
-	const [ isLocalPickupSelected, setLocalPickupSelected ] = useState( false );
+	// const [ isLocalPickupSelected, setLocalPickupSelected ] = useState( false );
 	// I need to figure out a way to tell if the radio option has been chosen to what value from THIS file.
 
 	const options = {
@@ -79,6 +84,18 @@ const Block = (
 			disabled: false,
 		},
 	};
+
+	// eslint-disable-next-line no-console
+	console.log( 1570 );
+	// eslint-disable-next-line no-console
+	console.log( isLocalPickupSelected );
+
+	isLocalPickupSelected = false;
+	// eslint-disable-next-line no-console
+	console.log( 1580 );
+	// The following is returning undefined.
+	// eslint-disable-next-line no-console
+	console.log( isLocalPickupSelected );
 
 	const {
 		shippingRates,
@@ -127,19 +144,21 @@ const Block = (
 				context={ noticeContexts.SHIPPING_METHODS }
 			/>
 
-			<RadioControl
-				selected={ selectedOption }
-				onChange={ ( value: string ) => {
-					// eslint-disable-next-line no-console
-					console.log( value );
-					setSelectedOption( value );
-					// I don't know what onSelectRate does but it doesn't
-					// seem to matter for what I am trying to do.
-					// onSelectRate( value );
-				} }
-				// Within this attriubte needs to be the component RadioControlOption
-				options={ optionsArray }
-			/>
+			<ValueContext.Provider value={ selectedOption }>
+				<RadioControl
+					selected={ selectedOption }
+					onChange={ ( value: string ) => {
+						// eslint-disable-next-line no-console
+						console.log( value );
+						setSelectedOption( value );
+						// I don't know what onSelectRate does but it doesn't
+						// seem to matter for what I am trying to do.
+						// onSelectRate( value );
+					} }
+					// Within this attriubte needs to be the component RadioControlOption
+					options={ optionsArray }
+				/>
+			</ValueContext.Provider>
 			<br />
 			<br />
 			<br />

@@ -13,6 +13,7 @@ import { CHECKOUT_STORE_KEY } from '@woocommerce/block-data';
  */
 import Block from './block';
 import attributes from './attributes';
+import { useCheckoutBlockContext } from '../../context';
 
 const FrontendBlock = ( {
 	title,
@@ -36,6 +37,8 @@ const FrontendBlock = ( {
 		select( CHECKOUT_STORE_KEY ).isProcessing()
 	);
 	const { showShippingFields, forcedBillingAddress } = useCheckoutAddress();
+
+	const { isLocalPickupSelected } = useCheckoutBlockContext();
 
 	if ( ! showShippingFields && ! forcedBillingAddress ) {
 		return null;
