@@ -41,6 +41,7 @@ export const Edit = ( {
 		showStepNumber: boolean;
 		className: string;
 		localPickupString: string;
+		shippingMethodEditSelection: string;
 	};
 	setAttributes: ( attributes: Record< string, unknown > ) => void;
 } ): JSX.Element => {

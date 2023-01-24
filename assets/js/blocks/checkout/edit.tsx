@@ -54,7 +54,6 @@ export const Edit = ( {
 	setAttributes: ( attributes: Record< string, unknown > ) => undefined;
 } ): JSX.Element => {
 	const {
-		isLocalPickupSelected,
 		showCompanyField,
 		requireCompanyField,
 		showApartmentField,
@@ -161,7 +160,6 @@ export const Edit = ( {
 							>
 								<CheckoutBlockContext.Provider
 									value={ {
-										isLocalPickupSelected,
 										showCompanyField,
 										requireCompanyField,
 										showApartmentField,

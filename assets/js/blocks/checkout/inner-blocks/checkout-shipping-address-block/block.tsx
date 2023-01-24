@@ -77,6 +77,10 @@ const Block = ( {
 	const getBlocksID = useSelect( ( select ) =>
 		select( blockStore ).getBlockOrder()
 	);
+
+	const checkPickupString =
+		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
+			.shippingMethodEditSelection;
 	// eslint-disable-next-line no-console
 	console.log( getBlocksID );
 	// eslint-disable-next-line no-console
@@ -98,11 +102,10 @@ const Block = ( {
 	);
 	// eslint-disable-next-line no-console
 	console.log( 1664 );
-
-	// I need to change the below to .shippingMethodEditSelectoin
-	const checkPickupString =
-		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
-			.localPickupString;
+	// eslint-disable-next-line no-console
+	console.log( checkPickupString );
+	// eslint-disable-next-line no-console
+	console.log( 1646 );
 
 	// Clears data if fields are hidden.
 	useEffect( () => {
