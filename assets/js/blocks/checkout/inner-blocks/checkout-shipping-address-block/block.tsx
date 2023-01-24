@@ -28,8 +28,9 @@ import type {
 	AddressField,
 	AddressFields,
 } from '@woocommerce/settings';
+import { store as blockStore } from '@wordpress/block-editor';
 
-// import { useEffect, useState } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -71,22 +72,36 @@ const Block = ( {
 	// the shipping address to the billing address if it was. This is not used on further toggles of the checkbox.
 	const [ addressesSynced, setAddressesSynced ] = useState( false );
 
-	// const value = useContext( ValueContext );
-	// Store selected rate ID in local state so shipping rates changes are shown in the UI instantly.
+	const getBlocks = useSelect( ( select ) =>
+		select( blockStore ).getBlocks()
+	);
 
-	const value = useContext( ValueContext );
-
-	// Okay now that I can read that value I can be like, if ValueContext is === true than don't render the shipping address section.
-	// only show the billing section.
-
+	// wp.data.select('core/block-editor').getBlocks()
+	const getBlocksID = useSelect( ( select ) =>
+		select( blockStore ).getBlockOrder()
+	);
 	// eslint-disable-next-line no-console
-	console.log( 'value = ' );
+	console.log( getBlocksID );
 	// eslint-disable-next-line no-console
-	console.log( value );
+	console.log( getBlocksID[ 0 ] );
+	// eslint-disable-next-line no-console
+	console.log( 1720 );
+	// eslint-disable-next-line no-console
+	console.log( getBlocks );
 	// eslint-disable-next-line no-console
 	console.log( 1702 );
 	// eslint-disable-next-line no-console
-	console.log( isLocalPickupSelected );
+	console.log( getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ] );
+	// eslint-disable-next-line no-console
+	console.log( 1682 );
+	// eslint-disable-next-line no-console
+	console.log(
+		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
+			.localPickupString
+	);
+	// eslint-disable-next-line no-console
+	console.log( 1664 );
+
 	// Clears data if fields are hidden.
 	useEffect( () => {
 		if ( ! showPhoneField ) {
@@ -170,10 +185,6 @@ const Block = ( {
 	/*
 	  End MoL Codeblock - Part 1
 	*/
-
-	if ( value === true ) {
-		return <p> Local pickup is selected </p>;
-	}
 
 	/*
 	  Start MoL Codeblock - Part 2

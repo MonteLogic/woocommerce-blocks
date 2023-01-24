@@ -65,14 +65,9 @@ const Block = (
 	// I need to pass this selectedRateId into the shipping-address block.
 	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
 
-	const isLocalPickupSelected = false;
-	// const [ isLocalPickupSelected, setSelectedOption ] = useState( selectedRateId );
-
 	// I need to pass selectedOption here
 
 	const { isEditor } = useEditorContext();
-	// const [ isLocalPickupSelected, setLocalPickupSelected ] = useState( false );
-	// I need to figure out a way to tell if the radio option has been chosen to what value from THIS file.
 
 	const options = {
 		value1: {
@@ -86,17 +81,6 @@ const Block = (
 			disabled: false,
 		},
 	};
-
-	// eslint-disable-next-line no-console
-	console.log( 1570 );
-	// eslint-disable-next-line no-console
-	console.log( isLocalPickupSelected );
-
-	// eslint-disable-next-line no-console
-	console.log( 1580 );
-	// The following is returning undefined.
-	// eslint-disable-next-line no-console
-	console.log( isLocalPickupSelected );
 
 	const {
 		shippingRates,
@@ -127,15 +111,6 @@ const Block = (
 		);
 	}
 
-	// Why don't I make a super dumb component here on the isEditor which will be easy to tell because at the end of the day it's already
-	// dummy text already.
-
-	// SO within the component there needs to be something in there which tells other componnets whom are viewing this component
-	// that the state is a certain way.
-
-	// It doesn't have to be the exact type just how it isn't named RadioControlOption throughout the
-	// file but the type is still used in other parts without the exact naming.
-
 	const optionsArray = Object.values( options ).map( ( option ) => ( {
 		...option,
 	} ) );
@@ -145,21 +120,19 @@ const Block = (
 				context={ noticeContexts.SHIPPING_METHODS }
 			/>
 
-			<ValueContext.Provider value={ selectedOption }>
-				<RadioControl
-					selected={ selectedOption }
-					onChange={ ( value: string ) => {
-						// eslint-disable-next-line no-console
-						console.log( value );
-						setSelectedOption( value );
-						// I don't know what onSelectRate does but it doesn't
-						// seem to matter for what I am trying to do.
-						// onSelectRate( value );
-					} }
-					// Within this attriubte needs to be the component RadioControlOption
-					options={ optionsArray }
-				/>
-			</ValueContext.Provider>
+			<RadioControl
+				selected={ selectedOption }
+				onChange={ ( value: string ) => {
+					// eslint-disable-next-line no-console
+					console.log( value );
+					setSelectedOption( value );
+					// I don't know what onSelectRate does but it doesn't
+					// seem to matter for what I am trying to do.
+					// onSelectRate( value );
+				} }
+				// Within this attriubte needs to be the component RadioControlOption
+				options={ optionsArray }
+			/>
 			<br />
 			<br />
 			<br />

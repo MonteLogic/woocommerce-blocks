@@ -38,7 +38,6 @@ const FrontendBlock = ( {
 	);
 	const { showShippingFields, forcedBillingAddress } = useCheckoutAddress();
 
-	const { isLocalPickupSelected } = useCheckoutBlockContext();
 
 	if ( ! showShippingFields && ! forcedBillingAddress ) {
 		return null;
