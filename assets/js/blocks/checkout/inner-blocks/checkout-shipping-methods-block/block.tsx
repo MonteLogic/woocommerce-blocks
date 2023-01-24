@@ -53,10 +53,14 @@ const renderShippingRatesControlOption = (
 
 export const ValueContext = createContext( false );
 
-const Block = (
-	selectedRate: CartShippingPackageShippingRate | undefined
-	// onSelectRate: ( selectedRateId: string ) => void
-): JSX.Element | null => {
+const Block = ( {
+	setAttributes,
+	selectedRate,
+}: // onSelectRate: ( selectedRateId: string ) => void
+{
+	selectedRate: CartShippingPackageShippingRate | undefined;
+	setAttributes: ( attributes: Record< string, unknown > ) => void;
+} ): JSX.Element | null => {
 	// I need to bring in state from the shipping methods block.
 
 	const selectedRateId = selectedRate?.rate_id || '';
@@ -126,6 +130,9 @@ const Block = (
 					// eslint-disable-next-line no-console
 					console.log( value );
 					setSelectedOption( value );
+					setAttributes( {
+						localPickupString: value,
+					} );
 					// I don't know what onSelectRate does but it doesn't
 					// seem to matter for what I am trying to do.
 					// onSelectRate( value );

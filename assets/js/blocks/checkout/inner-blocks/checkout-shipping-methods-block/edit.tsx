@@ -23,7 +23,6 @@ import {
 	AdditionalFieldsContent,
 } from '../../form-step';
 import Block from './block';
-import { useCheckoutBlockContext } from '../../context';
 
 type shippingAdminLink = {
 	id: number;
