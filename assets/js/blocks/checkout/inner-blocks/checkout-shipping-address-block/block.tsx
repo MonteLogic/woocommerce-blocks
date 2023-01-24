@@ -193,11 +193,11 @@ const Block = ( {
 	/*
 	  Start MoL Codeblock - Part 2
 	*/
-
-	if ( checkPickupString === 'value2' ) {
-		return <p>You will see nothing here except localPickupString</p>;
+	if ( isEditor ) {
+		if ( checkPickupString === 'value2' ) {
+			return <p>You will see nothing here except localPickupString</p>;
+		}
 	}
-
 	/*
 	  End MoL Codeblock - Part 2
 	*/
