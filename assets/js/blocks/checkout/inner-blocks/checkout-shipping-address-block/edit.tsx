@@ -37,7 +37,6 @@ export const Edit = ( {
 		requireCompanyField,
 		showPhoneField,
 		requirePhoneField,
-		isLocalPickupSelected,
 	} = useCheckoutBlockContext();
 
 	// eslint-disable-next-line no-console
@@ -47,8 +46,6 @@ export const Edit = ( {
 
 	// eslint-disable-next-line no-console
 	console.log( 1564 );
-	// eslint-disable-next-line no-console
-	console.log( isLocalPickupSelected );
 
 	const { addressFieldControls: Controls } =
 		useCheckoutBlockControlsContext();
@@ -72,8 +69,7 @@ export const Edit = ( {
 				requireCompanyField={ requireCompanyField }
 				showPhoneField={ showPhoneField }
 				requirePhoneField={ requirePhoneField }
-				localPickupString={ 'Something' }
-				isLocalPickupSelected={ isLocalPickupSelected }
+				localPickupString={ '' }
 			/>
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_ADDRESS } />
 		</FormStepBlock>

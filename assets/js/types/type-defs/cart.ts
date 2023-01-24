@@ -54,7 +54,6 @@ export interface BaseAddress {
 }
 
 export interface CartShippingPackageShippingRate extends CurrencyInfo {
-	isLocalPickupSelected: boolean;
 	rate_id: string;
 	name: string;
 	description: string;

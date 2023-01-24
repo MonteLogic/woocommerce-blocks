@@ -25,8 +25,7 @@ export default {
 	},
 	shippingMethodEditSelection: {
 		type: 'string',
-		default:
-			'Enter here which place the Local Pickup order is going to go.',
+		default: 'value1',
 		edtiable: true,
 	},
 

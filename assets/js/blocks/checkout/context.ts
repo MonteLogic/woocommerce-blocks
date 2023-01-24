@@ -7,7 +7,6 @@ import { createContext, useContext } from '@wordpress/element';
  * Context consumed by inner blocks.
  */
 export type CheckoutBlockContextProps = {
-	isLocalPickupSelected: boolean;
 	localPickupString: string;
 	showCompanyField: boolean;
 	showApartmentField: boolean;
@@ -27,7 +26,6 @@ export type CheckoutBlockControlsContextProps = {
 
 export const CheckoutBlockContext: React.Context< CheckoutBlockContextProps > =
 	createContext< CheckoutBlockContextProps >( {
-		isLocalPickupSelected: false,
 		localPickupString: '',
 		showCompanyField: false,
 		showApartmentField: false,

@@ -52,16 +52,9 @@ export const Edit = ( {
 		'activeShippingZones'
 	) as shippingAdminLink[];
 
-	const { isLocalPickupSelected, showCompanyField } =
-		useCheckoutBlockContext();
 	// eslint-disable-next-line no-console
 	console.log( 1810 );
 	// eslint-disable-next-line no-console
-	console.log( isLocalPickupSelected );
-	// eslint-disable-next-line no-console
-	console.log( 1410.5 );
-	// eslint-disable-next-line no-console
-	console.log( 'showCompanyField = ' + showCompanyField );
 
 	return (
 		<FormStepBlock
@@ -156,7 +149,7 @@ export const Edit = ( {
 				) }
 			</InspectorControls>
 			{ /* <Noninteractive> */ }
-			<Block isLocalPickupSelected={ isLocalPickupSelected } />
+			<Block />
 			<h2>Something - 5204</h2>
 			{ /* </Noninteractive> */ }
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_METHODS } />
