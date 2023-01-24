@@ -36,25 +36,22 @@ import { useSelect } from '@wordpress/data';
  * Internal dependencies
  */
 import PhoneNumber from '../../phone-number';
-import { ValueContext } from '../checkout-shipping-methods-block/block';
 // import ShippingMethods from '../checkout-shipping-methods-block/block';
 
 const Block = ( {
-	isLocalPickupSelected = false,
 	showCompanyField = false,
 	showApartmentField = false,
 	showPhoneField = false,
 	requireCompanyField = false,
 	requirePhoneField = false,
-	localPickupInfo = '',
+	localPickupString = '',
 }: {
-	isLocalPickupSelected: boolean;
 	showCompanyField: boolean;
 	showApartmentField: boolean;
 	showPhoneField: boolean;
 	requireCompanyField: boolean;
 	requirePhoneField: boolean;
-	localPickupInfo: string;
+	localPickupString: string;
 } ): JSX.Element => {
 	const {
 		defaultAddressFields,
@@ -102,6 +99,7 @@ const Block = ( {
 	// eslint-disable-next-line no-console
 	console.log( 1664 );
 
+	// I need to change the below to .shippingMethodEditSelectoin
 	const checkPickupString =
 		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
 			.localPickupString;
@@ -182,7 +180,7 @@ const Block = ( {
 		setUseShippingAsBilling( false );
 		return (
 			<>
-				<p>{ localPickupInfo }</p>
+				<p>{ localPickupString }</p>
 			</>
 		);
 	}

@@ -72,7 +72,7 @@ export const Edit = ( {
 				requireCompanyField={ requireCompanyField }
 				showPhoneField={ showPhoneField }
 				requirePhoneField={ requirePhoneField }
-				localPickupInfo={ 'Something' }
+				localPickupString={ 'Something' }
 				isLocalPickupSelected={ isLocalPickupSelected }
 			/>
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_ADDRESS } />

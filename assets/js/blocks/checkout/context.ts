@@ -8,7 +8,7 @@ import { createContext, useContext } from '@wordpress/element';
  */
 export type CheckoutBlockContextProps = {
 	isLocalPickupSelected: boolean;
-	localPickupInfo: string;
+	localPickupString: string;
 	showCompanyField: boolean;
 	showApartmentField: boolean;
 	showPhoneField: boolean;
@@ -28,7 +28,7 @@ export type CheckoutBlockControlsContextProps = {
 export const CheckoutBlockContext: React.Context< CheckoutBlockContextProps > =
 	createContext< CheckoutBlockContextProps >( {
 		isLocalPickupSelected: false,
-		localPickupInfo: '',
+		localPickupString: '',
 		showCompanyField: false,
 		showApartmentField: false,
 		showPhoneField: false,

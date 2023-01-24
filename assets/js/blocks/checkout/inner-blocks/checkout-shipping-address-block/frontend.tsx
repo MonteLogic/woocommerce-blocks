@@ -72,7 +72,7 @@ const FrontendBlock = ( {
 				showApartmentField={ showApartmentField }
 				showCompanyField={ showCompanyField }
 				showPhoneField={ showPhoneField }
-				localPickupInfo={ localPickupString }
+				localPickupString={ localPickupString }
 			/>
 			{ children }
 		</FormStep>

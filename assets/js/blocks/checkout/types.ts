@@ -7,7 +7,7 @@ export type InnerBlockTemplate = [
 export interface Attributes
 	extends Record< string, boolean | number | string > {
 	hasDarkControls: boolean;
-	localPickupInfo: string;
+	localPickupString: string;
 	showCompanyField: boolean;
 	showApartmentField: boolean;
 	showPhoneField: boolean;
