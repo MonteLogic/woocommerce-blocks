@@ -102,6 +102,10 @@ const Block = ( {
 	// eslint-disable-next-line no-console
 	console.log( 1664 );
 
+	const checkPickupString =
+		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
+			.localPickupString;
+
 	// Clears data if fields are hidden.
 	useEffect( () => {
 		if ( ! showPhoneField ) {
@@ -190,9 +194,14 @@ const Block = ( {
 	  Start MoL Codeblock - Part 2
 	*/
 
+	if ( checkPickupString === 'value2' ) {
+		return <p>You will see nothing here except localPickupString</p>;
+	}
+
 	/*
 	  End MoL Codeblock - Part 2
 	*/
+	// return <p>You will see nothing here except localPickupString</p>;
 	return (
 		<>
 			<AddressFormWrapperComponent>
