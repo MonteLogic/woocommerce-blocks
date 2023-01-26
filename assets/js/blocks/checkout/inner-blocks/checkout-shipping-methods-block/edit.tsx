@@ -12,7 +12,9 @@ import { PanelBody, ExternalLink } from '@wordpress/components';
 import { ADMIN_URL, getSetting } from '@woocommerce/settings';
 import ExternalLinkCard from '@woocommerce/editor-components/external-link-card';
 import { innerBlockAreas } from '@woocommerce/blocks-checkout';
-// import Noninteractive from '@woocommerce/base-components/noninteractive';
+import RadioControl from '@woocommerce/base-components/radio-control';
+import { useState } from '@wordpress/element';
+import type { CartShippingPackageShippingRate } from '@woocommerce/types';
 
 /**
  * Internal dependencies
@@ -22,7 +24,6 @@ import {
 	AdditionalFields,
 	AdditionalFieldsContent,
 } from '../../form-step';
-import Block from './block';
 
 type shippingAdminLink = {
 	id: number;
@@ -31,6 +32,7 @@ type shippingAdminLink = {
 };
 
 export const Edit = ( {
+	selectedRate,
 	attributes,
 	setAttributes,
 }: {
@@ -43,6 +45,7 @@ export const Edit = ( {
 		shippingMethodEditSelection: string;
 	};
 	setAttributes: ( attributes: Record< string, unknown > ) => void;
+	selectedRate: CartShippingPackageShippingRate | undefined;
 } ): JSX.Element => {
 	const globalShippingMethods = getSetting(
 		'globalShippingMethods'
@@ -51,9 +54,34 @@ export const Edit = ( {
 		'activeShippingZones'
 	) as shippingAdminLink[];
 
+	/*
+	  Start MoL Codeblock - edit.tsx
+	*/
+	const selectedRateId = selectedRate?.rate_id || '';
+	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
+
+	const options = {
+		value1: {
+			value: 'value1',
+			label: 'Free Shipping ',
+			disabled: false,
+		},
+		value2: {
+			value: 'value2',
+			label: 'Local Pickup',
+			disabled: false,
+		},
+	};
+
+	const optionsArray = Object.values( options ).map( ( option ) => ( {
+		...option,
+	} ) );
 	// eslint-disable-next-line no-console
 	console.log( 1810 );
-	// eslint-disable-next-line no-console
+
+	/*
+	  End MoL Codeblock - edit.tsx
+	*/
 
 	return (
 		<FormStepBlock
@@ -148,7 +176,21 @@ export const Edit = ( {
 				) }
 			</InspectorControls>
 			{ /* <Noninteractive> */ }
-			{ /* <Block /> */ }
+			<RadioControl
+				selected={ selectedOption }
+				onChange={ ( value: string ) => {
+					// eslint-disable-next-line no-console
+					console.log( value );
+					setSelectedOption( value );
+
+					// setRadioAttributes( value );
+					// I don't know what onSelectRate does but it doesn't
+					// seem to matter for what I am trying to do.
+					// onSelectRate( value );
+				} }
+				// Within this attriubte needs to be the component RadioControlOption
+				options={ optionsArray }
+			/>
 			<p>I am making my own radio component here.</p>
 
 			<h2>Something - 5204</h2>
