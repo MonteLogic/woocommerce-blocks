@@ -179,6 +179,10 @@ const Block = ( {
 	/*
 	  Start MoL Codeblock - Part 2
 	*/
+	// eslint-disable-next-line no-console
+	console.log( 2230 );
+	// eslint-disable-next-line no-console
+	console.log( checkPickupString );
 	if ( isEditor ) {
 		if ( checkPickupString === 'value2' ) {
 			return <p>You will see nothing here except localPickupString</p>;

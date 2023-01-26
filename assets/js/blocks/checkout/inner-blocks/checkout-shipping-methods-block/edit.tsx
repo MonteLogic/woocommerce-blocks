@@ -148,7 +148,9 @@ export const Edit = ( {
 				) }
 			</InspectorControls>
 			{ /* <Noninteractive> */ }
-			<Block />
+			{ /* <Block /> */ }
+			<p>I am making my own radio component here.</p>
+
 			<h2>Something - 5204</h2>
 			{ /* </Noninteractive> */ }
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_METHODS } />

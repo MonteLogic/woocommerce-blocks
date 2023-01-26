@@ -20,7 +20,7 @@ import type {
 import { createContext, useState } from '@wordpress/element';
 import RadioControl from '@woocommerce/base-components/radio-control';
 import { store as blockStore } from '@wordpress/block-editor';
-import { dispatch, useSelect, select } from '@wordpress/data';
+import { useSelect, select } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -55,12 +55,10 @@ const renderShippingRatesControlOption = (
 export const ValueContext = createContext( false );
 
 const Block = ( {
-	setAttributes,
 	selectedRate,
 }: // onSelectRate: ( selectedRateId: string ) => void
 {
 	selectedRate: CartShippingPackageShippingRate | undefined;
-	setAttributes: ( attributes: Record< string, unknown > ) => void;
 } ): JSX.Element | null => {
 	// I need to bring in state from the shipping methods block.
 
@@ -78,6 +76,13 @@ const Block = ( {
 	);
 
 	// const shippingMethodAttributes =
+	const checkPickupString =
+		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
+			.shippingMethodEditSelection;
+	// eslint-disable-next-line no-console
+	console.log( 1970 );
+	// eslint-disable-next-line no-console
+	console.log( checkPickupString );
 
 	const shippingMethodClientID =
 		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].clientId;
@@ -98,14 +103,10 @@ const Block = ( {
 	console.log( shippingMethodBlockAttributes );
 
 	const setRadioAttributes = ( value: string ) => {
-		const newAttributes = {
-			...shippingMethodBlockAttributes,
-			localPickupString: value,
-		};
-		dispatch( 'core/block-editor' ).updateBlock(
-			shippingMethodClientID,
-			newAttributes
-		);
+		// eslint-disable-next-line no-console
+		console.log( 2014 );
+		// eslint-disable-next-line no-console
+		console.log( value );
 
 		// eslint-disable-next-line no-console
 		console.log( 2070 );
@@ -114,12 +115,12 @@ const Block = ( {
 	const options = {
 		value1: {
 			value: 'value1',
-			label: 'Label 1',
+			label: 'Free Shipping ',
 			disabled: false,
 		},
 		value2: {
 			value: 'value2',
-			label: 'Label 2',
+			label: 'Local Pickup',
 			disabled: false,
 		},
 	};
@@ -169,9 +170,7 @@ const Block = ( {
 					console.log( value );
 					setSelectedOption( value );
 
-					setRadioAttributes( {
-						localPickupString: value,
-					} );
+					setRadioAttributes( value );
 					// I don't know what onSelectRate does but it doesn't
 					// seem to matter for what I am trying to do.
 					// onSelectRate( value );
