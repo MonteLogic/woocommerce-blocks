@@ -67,18 +67,9 @@ const Block = ( {
 		select( blockStore ).getBlocks()
 	);
 
-	// wp.data.select('core/block-editor').getBlocks()
-	const getBlocksID = useSelect( ( select ) =>
-		select( blockStore ).getBlockOrder()
-	);
-
 	const checkPickupString =
 		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
 			.shippingMethodEditSelection;
-	// eslint-disable-next-line no-console
-	console.log( getBlocksID );
-	// eslint-disable-next-line no-console
-	console.log( getBlocksID[ 0 ] );
 	// eslint-disable-next-line no-console
 	console.log( 1720 );
 	// eslint-disable-next-line no-console

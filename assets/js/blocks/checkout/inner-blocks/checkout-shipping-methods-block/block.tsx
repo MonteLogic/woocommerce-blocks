@@ -19,13 +19,14 @@ import type {
 } from '@woocommerce/types';
 import { createContext, useState } from '@wordpress/element';
 import RadioControl from '@woocommerce/base-components/radio-control';
+import { store as blockStore } from '@wordpress/block-editor';
+import { dispatch, useSelect, select } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
 import NoShippingPlaceholder from './no-shipping-placeholder';
 import './style.scss';
-// import { useCheckoutBlockContext } from '../../context';
 /**
  * Renders a shipping rate control option.
  *
@@ -72,6 +73,43 @@ const Block = ( {
 	// I need to pass selectedOption here
 
 	const { isEditor } = useEditorContext();
+	const getBlocks = useSelect( ( select ) =>
+		select( blockStore ).getBlocks()
+	);
+
+	// const shippingMethodAttributes =
+
+	const shippingMethodClientID =
+		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].clientId;
+
+	// eslint-disable-next-line no-console
+	console.log( 1980 );
+	// eslint-disable-next-line no-console
+	console.log( shippingMethodClientID );
+
+	// eslint-disable-next-line no-console
+	console.log( 2010 );
+
+	const shippingMethodBlockAttributes = select(
+		'core/block-editor'
+	).getBlockAttributes( shippingMethodClientID );
+
+	// eslint-disable-next-line no-console
+	console.log( shippingMethodBlockAttributes );
+
+	const setRadioAttributes = ( value: string ) => {
+		const newAttributes = {
+			...shippingMethodBlockAttributes,
+			localPickupString: value,
+		};
+		dispatch( 'core/block-editor' ).updateBlock(
+			shippingMethodClientID,
+			newAttributes
+		);
+
+		// eslint-disable-next-line no-console
+		console.log( 2070 );
+	};
 
 	const options = {
 		value1: {
@@ -130,7 +168,8 @@ const Block = ( {
 					// eslint-disable-next-line no-console
 					console.log( value );
 					setSelectedOption( value );
-					setAttributes( {
+
+					setRadioAttributes( {
 						localPickupString: value,
 					} );
 					// I don't know what onSelectRate does but it doesn't
