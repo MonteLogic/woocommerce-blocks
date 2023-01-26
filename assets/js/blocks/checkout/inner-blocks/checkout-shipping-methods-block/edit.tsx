@@ -182,7 +182,9 @@ export const Edit = ( {
 					// eslint-disable-next-line no-console
 					console.log( value );
 					setSelectedOption( value );
-
+					setAttributes( {
+						shippingMethodEditSelection: value,
+					} );
 					// setRadioAttributes( value );
 					// I don't know what onSelectRate does but it doesn't
 					// seem to matter for what I am trying to do.
