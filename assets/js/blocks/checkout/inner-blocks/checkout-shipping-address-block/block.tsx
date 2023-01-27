@@ -57,38 +57,14 @@ const Block = ( {
 		setUseShippingAsBilling,
 	} = useCheckoutAddress();
 	const { dispatchCheckoutEvent } = useStoreEvents();
-	const { isEditor } = useEditorContext();
+	const { isEditor, shippingMethodsSelection } = useEditorContext();
 
 	// This is used to track whether the "Use shipping as billing" checkbox was checked on first load and if we synced
 	// the shipping address to the billing address if it was. This is not used on further toggles of the checkbox.
 	const [ addressesSynced, setAddressesSynced ] = useState( false );
 
-	const getBlocks = useSelect( ( select ) =>
-		select( blockStore ).getBlocks()
-	);
-
-	const checkPickupString =
-		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
-			.shippingMethodEditSelection;
-	// eslint-disable-next-line no-console
-	console.log( 1720 );
-	// eslint-disable-next-line no-console
-	console.log( getBlocks );
-	// eslint-disable-next-line no-console
-	console.log( 1702 );
-	// eslint-disable-next-line no-console
-	console.log( getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ] );
-	// eslint-disable-next-line no-console
-	console.log( 1682 );
-	// eslint-disable-next-line no-console
-	console.log(
-		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
-			.localPickupString
-	);
 	// eslint-disable-next-line no-console
 	console.log( 1664 );
-	// eslint-disable-next-line no-console
-	console.log( checkPickupString );
 	// eslint-disable-next-line no-console
 	console.log( 1646 );
 
@@ -181,10 +157,8 @@ const Block = ( {
 	*/
 	// eslint-disable-next-line no-console
 	console.log( 2230 );
-	// eslint-disable-next-line no-console
-	console.log( checkPickupString );
 	if ( isEditor ) {
-		if ( checkPickupString === 'value2' ) {
+		if ( shippingMethodsSelection === 'value2' ) {
 			return <p>You will see nothing here except localPickupString</p>;
 		}
 	}

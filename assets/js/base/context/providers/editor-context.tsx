@@ -37,7 +37,7 @@ export const useEditorContext = (): EditorContextType => {
 };
 
 export const EditorProvider = ( {
-	shippingMethodsSelection = 'value1 from context',
+	shippingMethodsSelection = 'value1',
 	children,
 	currentPostId = 0,
 	previewData = {},

@@ -43,7 +43,6 @@ export const Edit = ( {
 		showStepNumber: boolean;
 		className: string;
 		localPickupString: string;
-		shippingMethodEditSelection: string;
 	};
 	setAttributes: ( attributes: Record< string, unknown > ) => void;
 	selectedRate: CartShippingPackageShippingRate | undefined;
@@ -67,6 +66,8 @@ export const Edit = ( {
 
 	const selectedRateId = selectedRate?.rate_id || '';
 	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
+	const [ newShippingMethodsSelection, setShippingMethodsSelection ] =
+		useState( shippingMethodsSelection );
 
 	const options = {
 		value1: {

@@ -8,7 +8,6 @@ export interface Attributes
 	extends Record< string, boolean | number | string > {
 	hasDarkControls: boolean;
 	localPickupString: string;
-	shippingMethodEditSelection: string;
 	showCompanyField: boolean;
 	showApartmentField: boolean;
 	showPhoneField: boolean;
