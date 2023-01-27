@@ -15,6 +15,7 @@ import { innerBlockAreas } from '@woocommerce/blocks-checkout';
 import RadioControl from '@woocommerce/base-components/radio-control';
 import { useState } from '@wordpress/element';
 import type { CartShippingPackageShippingRate } from '@woocommerce/types';
+import { useEditorContext } from '@woocommerce/base-context';
 
 /**
  * Internal dependencies
@@ -57,18 +58,25 @@ export const Edit = ( {
 	/*
 	  Start MoL Codeblock - edit.tsx
 	*/
+	const { shippingMethodsSelection } = useEditorContext();
+
+	// eslint-disable-next-line no-console
+	console.log( 1805 );
+	// eslint-disable-next-line no-console
+	console.log( shippingMethodsSelection );
+
 	const selectedRateId = selectedRate?.rate_id || '';
 	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
 
 	const options = {
 		value1: {
 			value: 'value1',
-			label: 'Free Shipping ',
+			label: 'Free Shipping - value1 ',
 			disabled: false,
 		},
 		value2: {
 			value: 'value2',
-			label: 'Local Pickup',
+			label: 'Local Pickup - value2',
 			disabled: false,
 		},
 	};
@@ -182,9 +190,7 @@ export const Edit = ( {
 					// eslint-disable-next-line no-console
 					console.log( value );
 					setSelectedOption( value );
-					setAttributes( {
-						shippingMethodEditSelection: value,
-					} );
+
 					// setRadioAttributes( value );
 					// I don't know what onSelectRate does but it doesn't
 					// seem to matter for what I am trying to do.

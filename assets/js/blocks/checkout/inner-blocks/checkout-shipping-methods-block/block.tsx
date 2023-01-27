@@ -19,8 +19,6 @@ import type {
 } from '@woocommerce/types';
 import { createContext, useState } from '@wordpress/element';
 import RadioControl from '@woocommerce/base-components/radio-control';
-import { store as blockStore } from '@wordpress/block-editor';
-import { useSelect, select } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -70,60 +68,22 @@ const Block = ( {
 
 	// I need to pass selectedOption here
 
-	const { isEditor } = useEditorContext();
-	const getBlocks = useSelect( ( select ) =>
-		select( blockStore ).getBlocks()
-	);
+	const { isEditor, shippingMethodsSelection } = useEditorContext();
+
+	// eslint-disable-next-line no-console
+	console.log( 1960 );
+	// eslint-disable-next-line no-console
+	console.log( shippingMethodsSelection );
 
 	// const shippingMethodAttributes =
-	const checkPickupString =
-		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
-			.shippingMethodEditSelection;
-	// eslint-disable-next-line no-console
-	console.log( 1970 );
-	// eslint-disable-next-line no-console
-	console.log( checkPickupString );
-
-	const shippingMethodClientID =
-		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].clientId;
-
 	// eslint-disable-next-line no-console
 	console.log( 1980 );
 	// eslint-disable-next-line no-console
-	console.log( shippingMethodClientID );
 
 	// eslint-disable-next-line no-console
 	console.log( 2010 );
 
-	const shippingMethodBlockAttributes = select(
-		'core/block-editor'
-	).getBlockAttributes( shippingMethodClientID );
 
-	// eslint-disable-next-line no-console
-	console.log( shippingMethodBlockAttributes );
-
-	const setRadioAttributes = ( value: string ) => {
-		// eslint-disable-next-line no-console
-		console.log( 2014 );
-		// eslint-disable-next-line no-console
-		console.log( value );
-
-		// eslint-disable-next-line no-console
-		console.log( 2070 );
-	};
-
-	const options = {
-		value1: {
-			value: 'value1',
-			label: 'Free Shipping ',
-			disabled: false,
-		},
-		value2: {
-			value: 'value2',
-			label: 'Local Pickup',
-			disabled: false,
-		},
-	};
 
 	const {
 		shippingRates,
@@ -154,30 +114,13 @@ const Block = ( {
 		);
 	}
 
-	const optionsArray = Object.values( options ).map( ( option ) => ( {
-		...option,
-	} ) );
 	return (
 		<>
 			<StoreNoticesContainer
 				context={ noticeContexts.SHIPPING_METHODS }
 			/>
 
-			<RadioControl
-				selected={ selectedOption }
-				onChange={ ( value: string ) => {
-					// eslint-disable-next-line no-console
-					console.log( value );
-					setSelectedOption( value );
 
-					setRadioAttributes( value );
-					// I don't know what onSelectRate does but it doesn't
-					// seem to matter for what I am trying to do.
-					// onSelectRate( value );
-				} }
-				// Within this attriubte needs to be the component RadioControlOption
-				options={ optionsArray }
-			/>
 			<br />
 			<br />
 			<br />

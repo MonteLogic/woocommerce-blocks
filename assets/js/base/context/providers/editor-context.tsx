@@ -17,11 +17,14 @@ interface EditorContextType {
 	// Object containing preview data for the editor.
 	previewData: Record< string, unknown >;
 
+	shippingMethodsSelection: string;
+
 	// Get data by name.
 	getPreviewData: ( name: string ) => Record< string, unknown >;
 }
 
 const EditorContext = createContext( {
+	shippingMethodsSelection: '',
 	isEditor: false,
 	currentPostId: 0,
 	currentView: '',
@@ -34,11 +37,13 @@ export const useEditorContext = (): EditorContextType => {
 };
 
 export const EditorProvider = ( {
+	shippingMethodsSelection = 'value1 from context',
 	children,
 	currentPostId = 0,
 	previewData = {},
 	currentView = '',
 }: {
+	shippingMethodsSelection?: string | undefined;
 	children: React.ReactChildren;
 	currentPostId?: number | undefined;
 	previewData?: Record< string, unknown > | undefined;
@@ -63,6 +68,7 @@ export const EditorProvider = ( {
 	);
 
 	const editorData: EditorContextType = {
+		shippingMethodsSelection,
 		isEditor: true,
 		currentPostId: editingPostId,
 		currentView,
