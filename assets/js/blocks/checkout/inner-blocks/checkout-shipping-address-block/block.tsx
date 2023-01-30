@@ -22,9 +22,6 @@ import type {
 	AddressField,
 	AddressFields,
 } from '@woocommerce/settings';
-import { store as blockStore } from '@wordpress/block-editor';
-
-import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -62,11 +59,6 @@ const Block = ( {
 	// This is used to track whether the "Use shipping as billing" checkbox was checked on first load and if we synced
 	// the shipping address to the billing address if it was. This is not used on further toggles of the checkbox.
 	const [ addressesSynced, setAddressesSynced ] = useState( false );
-
-	// eslint-disable-next-line no-console
-	console.log( 1664 );
-	// eslint-disable-next-line no-console
-	console.log( 1646 );
 
 	// Clears data if fields are hidden.
 	useEffect( () => {
@@ -160,8 +152,14 @@ const Block = ( {
 	// eslint-disable-next-line no-console
 	console.log( shippingMethodSelection );
 	if ( isEditor ) {
+		setUseShippingAsBilling( false );
 		if ( shippingMethodSelection === 'value2' ) {
-			return <p>You will see nothing here except localPickupString</p>;
+			return (
+				<>
+					<h1>Message</h1>
+					<p>{ localPickupString }</p>
+				</>
+			);
 		}
 	}
 	/*

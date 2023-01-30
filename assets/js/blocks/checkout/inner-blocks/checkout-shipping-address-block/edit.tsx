@@ -26,6 +26,7 @@ export const Edit = ( {
 	attributes: {
 		title: string;
 		description: string;
+		localPickupString: string;
 		showStepNumber: boolean;
 		className: string;
 	};
@@ -69,7 +70,7 @@ export const Edit = ( {
 				requireCompanyField={ requireCompanyField }
 				showPhoneField={ showPhoneField }
 				requirePhoneField={ requirePhoneField }
-				localPickupString={ '' }
+				localPickupString={ attributes.localPickupString }
 			/>
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_ADDRESS } />
 		</FormStepBlock>

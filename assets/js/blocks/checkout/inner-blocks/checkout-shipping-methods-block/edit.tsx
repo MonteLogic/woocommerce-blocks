@@ -25,7 +25,6 @@ import {
 	AdditionalFields,
 	AdditionalFieldsContent,
 } from '../../form-step';
-import { shipping } from '@wordpress/icons/build-types';
 
 type shippingAdminLink = {
 	id: number;
