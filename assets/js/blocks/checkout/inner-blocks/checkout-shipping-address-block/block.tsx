@@ -57,7 +57,7 @@ const Block = ( {
 		setUseShippingAsBilling,
 	} = useCheckoutAddress();
 	const { dispatchCheckoutEvent } = useStoreEvents();
-	const { isEditor, shippingMethodsSelection } = useEditorContext();
+	const { isEditor } = useEditorContext();
 
 	// This is used to track whether the "Use shipping as billing" checkbox was checked on first load and if we synced
 	// the shipping address to the billing address if it was. This is not used on further toggles of the checkbox.
@@ -157,11 +157,6 @@ const Block = ( {
 	*/
 	// eslint-disable-next-line no-console
 	console.log( 2230 );
-	if ( isEditor ) {
-		if ( shippingMethodsSelection === 'value2' ) {
-			return <p>You will see nothing here except localPickupString</p>;
-		}
-	}
 	/*
 	  End MoL Codeblock - Part 2
 	*/

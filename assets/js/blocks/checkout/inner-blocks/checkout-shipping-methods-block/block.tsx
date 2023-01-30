@@ -67,13 +67,12 @@ const Block = ( {
 	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
 
 	// I need to pass selectedOption here
-
-	const { isEditor, shippingMethodsSelection } = useEditorContext();
+	const { isEditor, shippingMethodSelection } = useEditorContext();
 
 	// eslint-disable-next-line no-console
 	console.log( 1960 );
 	// eslint-disable-next-line no-console
-	console.log( shippingMethodsSelection );
+	console.log( shippingMethodSelection );
 
 	// const shippingMethodAttributes =
 	// eslint-disable-next-line no-console
@@ -82,8 +81,6 @@ const Block = ( {
 
 	// eslint-disable-next-line no-console
 	console.log( 2010 );
-
-
 
 	const {
 		shippingRates,
@@ -119,7 +116,6 @@ const Block = ( {
 			<StoreNoticesContainer
 				context={ noticeContexts.SHIPPING_METHODS }
 			/>
-
 
 			<br />
 			<br />

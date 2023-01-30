@@ -13,7 +13,7 @@ import { ADMIN_URL, getSetting } from '@woocommerce/settings';
 import ExternalLinkCard from '@woocommerce/editor-components/external-link-card';
 import { innerBlockAreas } from '@woocommerce/blocks-checkout';
 import RadioControl from '@woocommerce/base-components/radio-control';
-import { useState } from '@wordpress/element';
+import { useCallback, useEffect, useState } from '@wordpress/element';
 import type { CartShippingPackageShippingRate } from '@woocommerce/types';
 import { useEditorContext } from '@woocommerce/base-context';
 
@@ -57,18 +57,6 @@ export const Edit = ( {
 	/*
 	  Start MoL Codeblock - edit.tsx
 	*/
-	const { shippingMethodsSelection } = useEditorContext();
-
-	// eslint-disable-next-line no-console
-	console.log( 1805 );
-	// eslint-disable-next-line no-console
-	console.log( shippingMethodsSelection );
-
-	const selectedRateId = selectedRate?.rate_id || '';
-	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
-	const [ newShippingMethodsSelection, setShippingMethodsSelection ] =
-		useState( shippingMethodsSelection );
-
 	const options = {
 		value1: {
 			value: 'value1',
@@ -81,14 +69,23 @@ export const Edit = ( {
 			disabled: false,
 		},
 	};
-
 	const optionsArray = Object.values( options ).map( ( option ) => ( {
 		...option,
 	} ) );
-	// eslint-disable-next-line no-console
-	console.log( 1810 );
+
+	const { shippingMethodSelection, setShippingMethodSelection } =
+		useEditorContext();
+	const selectedRateId = selectedRate?.rate_id || '';
+	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
+
+	const handleShippingMethodChange = ( newValue: string ) => {
+		// eslint-disable-next-line no-console
+		console.log( 1801.1 );
+		setShippingMethodSelection( newValue );
+	};
 
 	/*
+
 	  End MoL Codeblock - edit.tsx
 	*/
 
@@ -188,22 +185,28 @@ export const Edit = ( {
 			<RadioControl
 				selected={ selectedOption }
 				onChange={ ( value: string ) => {
+					setSelectedOption( value );
 					// eslint-disable-next-line no-console
 					console.log( value );
-					setSelectedOption( value );
-
-					// setRadioAttributes( value );
-					// I don't know what onSelectRate does but it doesn't
-					// seem to matter for what I am trying to do.
-					// onSelectRate( value );
+					// eslint-disable-next-line no-console
+					console.log( 1812 );
+					// eslint-disable-next-line no-console
+					console.log( shippingMethodSelection );
 				} }
 				// Within this attriubte needs to be the component RadioControlOption
 				options={ optionsArray }
 			/>
-			<p>I am making my own radio component here.</p>
+			<br />
 
-			<h2>Something - 5204</h2>
-			{ /* </Noninteractive> */ }
+			<div>
+				<p>Current shipping method: { shippingMethodSelection }</p>
+				<button
+					onClick={ () => handleShippingMethodChange( 'value4' ) }
+				>
+					Change shipping method
+				</button>
+			</div>
+
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_METHODS } />
 		</FormStepBlock>
 	);

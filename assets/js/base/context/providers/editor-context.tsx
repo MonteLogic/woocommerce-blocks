@@ -1,7 +1,12 @@
 /**
  * External dependencies
  */
-import { createContext, useContext, useCallback } from '@wordpress/element';
+import {
+	createContext,
+	useContext,
+	useCallback,
+	useState,
+} from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 
 interface EditorContextType {
@@ -17,18 +22,23 @@ interface EditorContextType {
 	// Object containing preview data for the editor.
 	previewData: Record< string, unknown >;
 
-	shippingMethodsSelection: string;
+	// String to view the shipping method selection on the edit page.
+	shippingMethodSelection: string;
+
+	// Setter function to change the shippingMethodSelection string
+	setShippingMethodSelection: ( shippingMethodSelection: string ) => void;
 
 	// Get data by name.
 	getPreviewData: ( name: string ) => Record< string, unknown >;
 }
 
 const EditorContext = createContext( {
-	shippingMethodsSelection: '',
+	shippingMethodSelection: '',
 	isEditor: false,
 	currentPostId: 0,
 	currentView: '',
 	previewData: {},
+	setShippingMethodSelection: () => null,
 	getPreviewData: () => ( {} ),
 } as EditorContextType );
 
@@ -37,13 +47,13 @@ export const useEditorContext = (): EditorContextType => {
 };
 
 export const EditorProvider = ( {
-	shippingMethodsSelection = 'value1',
+	shippingMethodSelection = 'value1',
 	children,
 	currentPostId = 0,
 	previewData = {},
 	currentView = '',
 }: {
-	shippingMethodsSelection?: string | undefined;
+	shippingMethodSelection?: string | undefined;
 	children: React.ReactChildren;
 	currentPostId?: number | undefined;
 	previewData?: Record< string, unknown > | undefined;
@@ -56,7 +66,6 @@ export const EditorProvider = ( {
 				: select( 'core/editor' ).getCurrentPostId(),
 		[ currentPostId ]
 	);
-
 	const getPreviewData = useCallback(
 		( name: string ): Record< string, unknown > => {
 			if ( previewData && name in previewData ) {
@@ -67,13 +76,24 @@ export const EditorProvider = ( {
 		[ previewData ]
 	);
 
+	const [ shippingMethodSelectionValue, setShippingMethodSelectionValue ] =
+		useState( shippingMethodSelection );
+
+	const setShippingMethodSelection = useCallback(
+		( shippingMethodSelection: string ) => {
+			setShippingMethodSelectionValue( shippingMethodSelection );
+		},
+		[]
+	);
+
 	const editorData: EditorContextType = {
-		shippingMethodsSelection,
+		shippingMethodSelection: shippingMethodSelectionValue,
 		isEditor: true,
 		currentPostId: editingPostId,
 		currentView,
 		previewData,
 		getPreviewData,
+		setShippingMethodSelection,
 	};
 
 	return (
