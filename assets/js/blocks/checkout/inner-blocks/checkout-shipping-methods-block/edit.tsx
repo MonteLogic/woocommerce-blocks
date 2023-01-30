@@ -79,21 +79,7 @@ export const Edit = ( {
 	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
 
 	const handleShippingMethodChange = ( newValue: string ) => {
-		// eslint-disable-next-line no-console
-		console.log( 1801.1 );
-
-		// eslint-disable-next-line no-console
-		console.log( 1801.15 );
-		// eslint-disable-next-line no-console
-		console.log( newValue );
-
 		setShippingMethodSelection( newValue );
-
-		// eslint-disable-next-line no-console
-		console.log( shippingMethodSelection );
-
-		// eslint-disable-next-line no-console
-		console.log( 1801.2 );
 	};
 
 	/*

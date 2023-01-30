@@ -80,6 +80,7 @@ export const EditorProvider = ( {
 		useState( shippingMethodSelection );
 
 	const setShippingMethodSelection = useCallback(
+		// eslint-disable-next-line @typescript-eslint/no-shadow
 		( shippingMethodSelection: string ) => {
 			setShippingMethodSelectionValue( shippingMethodSelection );
 		},

@@ -101,16 +101,6 @@ const Block = ( {
 	] ) as Record< keyof AddressFields, Partial< AddressField > >;
 
 	const AddressFormWrapperComponent = isEditor ? Noninteractive : Fragment;
-	if ( isEditor ) {
-		// Working on changing
-		// eslint-disable-next-line no-console
-		console.log( 'On the editor' );
-		// eslint-disable-next-line no-console
-		console.log(
-			'I would like to have state actions here. Which would then be an attribute(?), additional state.'
-		);
-		// I need to access the shipping-methods state here.
-	}
 
 	/*
 	  Start MoL Codeblock - Part 1
@@ -147,16 +137,11 @@ const Block = ( {
 	/*
 	  Start MoL Codeblock - Part 2
 	*/
-	// eslint-disable-next-line no-console
-	console.log( 2230 );
-	// eslint-disable-next-line no-console
-	console.log( shippingMethodSelection );
 	if ( isEditor ) {
 		setUseShippingAsBilling( false );
 		if ( shippingMethodSelection === 'value2' ) {
 			return (
 				<>
-					<h1>Message</h1>
 					<p>{ localPickupString }</p>
 				</>
 			);
