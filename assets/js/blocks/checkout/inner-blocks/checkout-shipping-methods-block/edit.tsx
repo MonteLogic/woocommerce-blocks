@@ -25,6 +25,7 @@ import {
 	AdditionalFields,
 	AdditionalFieldsContent,
 } from '../../form-step';
+import { shipping } from '@wordpress/icons/build-types';
 
 type shippingAdminLink = {
 	id: number;
@@ -81,7 +82,19 @@ export const Edit = ( {
 	const handleShippingMethodChange = ( newValue: string ) => {
 		// eslint-disable-next-line no-console
 		console.log( 1801.1 );
+
+		// eslint-disable-next-line no-console
+		console.log( 1801.15 );
+		// eslint-disable-next-line no-console
+		console.log( newValue );
+
 		setShippingMethodSelection( newValue );
+
+		// eslint-disable-next-line no-console
+		console.log( shippingMethodSelection );
+
+		// eslint-disable-next-line no-console
+		console.log( 1801.2 );
 	};
 
 	/*
@@ -182,6 +195,10 @@ export const Edit = ( {
 				) }
 			</InspectorControls>
 			{ /* <Noninteractive> */ }
+			{ shippingMethodSelection === 'value2' ? (
+				<h1>New Component</h1>
+			) : null }
+
 			<RadioControl
 				selected={ selectedOption }
 				onChange={ ( value: string ) => {
@@ -190,8 +207,11 @@ export const Edit = ( {
 					console.log( value );
 					// eslint-disable-next-line no-console
 					console.log( 1812 );
+					handleShippingMethodChange( value );
 					// eslint-disable-next-line no-console
 					console.log( shippingMethodSelection );
+					// eslint-disable-next-line no-console
+					console.log( 1812.12 );
 				} }
 				// Within this attriubte needs to be the component RadioControlOption
 				options={ optionsArray }
