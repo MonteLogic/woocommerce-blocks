@@ -203,15 +203,7 @@ export const Edit = ( {
 				selected={ selectedOption }
 				onChange={ ( value: string ) => {
 					setSelectedOption( value );
-					// eslint-disable-next-line no-console
-					console.log( value );
-					// eslint-disable-next-line no-console
-					console.log( 1812 );
 					handleShippingMethodChange( value );
-					// eslint-disable-next-line no-console
-					console.log( shippingMethodSelection );
-					// eslint-disable-next-line no-console
-					console.log( 1812.12 );
 				} }
 				// Within this attriubte needs to be the component RadioControlOption
 				options={ optionsArray }
