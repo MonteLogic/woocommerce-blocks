@@ -22,6 +22,8 @@ import type {
 	AddressField,
 	AddressFields,
 } from '@woocommerce/settings';
+import { useSelect } from '@wordpress/data';
+import { store as blockStore } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -106,10 +108,16 @@ const Block = ( {
 	  Start MoL Codeblock - Part 1
 	*/
 
+	// const getBlocksID = useSelect( ( select ) =>
+	// 	select( blockStore ).getBlockOrder()
+	// );
+
+	const getBlocks = useSelect( ( select ) =>
+		select( blockStore ).getBlocks()
+	);
+
 	const { shippingRates } = useStoreCart();
 
-	// eslint-disable-next-line no-console
-	console.log( shippingRates );
 	// So I guess shippingRates is an array.
 	// Looking for method_id
 	const selectedShippingRates = shippingRates.flatMap(
@@ -120,13 +128,11 @@ const Block = ( {
 		}
 	);
 
-	// eslint-disable-next-line no-console
-	console.log( selectedShippingRates[ 0 ] );
 	if ( selectedShippingRates[ 0 ] === 'local_pickup' ) {
 		setUseShippingAsBilling( false );
 		return (
 			<>
-				<p>{ localPickupString }</p>
+				<p>Default</p>
 			</>
 		);
 	}
@@ -138,11 +144,16 @@ const Block = ( {
 	  Start MoL Codeblock - Part 2
 	*/
 	if ( isEditor ) {
+		// wp.data.select('core/block-editor').getBlocks()
+		const showString =
+			getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
+				.localPickupString;
+
 		setUseShippingAsBilling( false );
 		if ( shippingMethodSelection === 'value2' ) {
 			return (
 				<>
-					<p>{ localPickupString }</p>
+					<p>{ showString }</p>
 				</>
 			);
 		}

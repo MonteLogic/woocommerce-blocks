@@ -5,6 +5,8 @@ import classnames from 'classnames';
 import { useBlockProps } from '@wordpress/block-editor';
 import { innerBlockAreas } from '@woocommerce/blocks-checkout';
 import { useCheckoutAddress } from '@woocommerce/base-context/hooks';
+import { select } from '@wordpress/data';
+
 /**
  * Internal dependencies
  */
@@ -40,20 +42,17 @@ export const Edit = ( {
 		requirePhoneField,
 	} = useCheckoutBlockContext();
 
-	// eslint-disable-next-line no-console
-	console.log( 1410 );
-	// eslint-disable-next-line no-console
-	console.log( 'showCompanyField = ' + showCompanyField );
-
-	// eslint-disable-next-line no-console
-	console.log( 1564 );
-
 	const { addressFieldControls: Controls } =
 		useCheckoutBlockControlsContext();
 	const { showShippingFields } = useCheckoutAddress();
 	if ( ! showShippingFields ) {
 		return null;
 	}
+	// eslint-disable-next-line no-console
+	console.log( 1304 );
+	// eslint-disable-next-line no-console
+	console.log( attributes.localPickupString );
+
 	return (
 		<FormStepBlock
 			setAttributes={ setAttributes }

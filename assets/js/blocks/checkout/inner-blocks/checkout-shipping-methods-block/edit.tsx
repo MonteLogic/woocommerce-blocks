@@ -13,7 +13,7 @@ import { ADMIN_URL, getSetting } from '@woocommerce/settings';
 import ExternalLinkCard from '@woocommerce/editor-components/external-link-card';
 import { innerBlockAreas } from '@woocommerce/blocks-checkout';
 import RadioControl from '@woocommerce/base-components/radio-control';
-import { useCallback, useEffect, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import type { CartShippingPackageShippingRate } from '@woocommerce/types';
 import { useEditorContext } from '@woocommerce/base-context';
 
@@ -179,10 +179,6 @@ export const Edit = ( {
 					</PanelBody>
 				) }
 			</InspectorControls>
-			{ /* <Noninteractive> */ }
-			{ shippingMethodSelection === 'value2' ? (
-				<h1>New Component</h1>
-			) : null }
 
 			<RadioControl
 				selected={ selectedOption }
@@ -193,7 +189,6 @@ export const Edit = ( {
 				// Within this attriubte needs to be the component RadioControlOption
 				options={ optionsArray }
 			/>
-			<br />
 
 			<div>
 				<p>Current shipping method: { shippingMethodSelection }</p>
