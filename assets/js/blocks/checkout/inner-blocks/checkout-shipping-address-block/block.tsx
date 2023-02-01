@@ -29,15 +29,14 @@ import { store as blockStore } from '@wordpress/block-editor';
  * Internal dependencies
  */
 import PhoneNumber from '../../phone-number';
-// import ShippingMethods from '../checkout-shipping-methods-block/block';
 
 const Block = ( {
+	localPickupString,
 	showCompanyField = false,
 	showApartmentField = false,
 	showPhoneField = false,
 	requireCompanyField = false,
 	requirePhoneField = false,
-	localPickupString = '',
 }: {
 	showCompanyField: boolean;
 	showApartmentField: boolean;
@@ -112,6 +111,20 @@ const Block = ( {
 	// 	select( blockStore ).getBlockOrder()
 	// );
 
+	// eslint-disable-next-line no-console
+	console.log( 1210 );
+
+	// eslint-disable-next-line no-console
+	console.log( localPickupString );
+	// eslint-disable-next-line no-console
+	console.log( 1212 );
+
+	// eslint-disable-next-line no-console
+	// console.log( attributes.deuxPickupString );
+
+	// eslint-disable-next-line no-console
+	console.log( 1214 );
+
 	const getBlocks = useSelect( ( select ) =>
 		select( blockStore ).getBlocks()
 	);
@@ -132,7 +145,7 @@ const Block = ( {
 		setUseShippingAsBilling( false );
 		return (
 			<>
-				<p>Default</p>
+				<p>Insert attribute from other block here.</p>
 			</>
 		);
 	}

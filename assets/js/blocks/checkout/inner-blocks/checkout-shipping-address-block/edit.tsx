@@ -2,10 +2,10 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, store as blockStore } from '@wordpress/block-editor';
 import { innerBlockAreas } from '@woocommerce/blocks-checkout';
 import { useCheckoutAddress } from '@woocommerce/base-context/hooks';
-import { select } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -31,9 +31,13 @@ export const Edit = ( {
 		localPickupString: string;
 		showStepNumber: boolean;
 		className: string;
+		deuxPickupString: string;
 	};
 	setAttributes: ( attributes: Record< string, unknown > ) => void;
 } ): JSX.Element | null => {
+	const getBlocks = useSelect( ( select ) =>
+		select( blockStore ).getBlocks()
+	);
 	const {
 		showCompanyField,
 		showApartmentField,
@@ -48,10 +52,24 @@ export const Edit = ( {
 	if ( ! showShippingFields ) {
 		return null;
 	}
+	const showString =
+		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
+			.localPickupString;
+
+	setAttributes( {
+		deuxPickupString: showString,
+	} );
+
 	// eslint-disable-next-line no-console
 	console.log( 1304 );
+	// This is only bringing in the default value.
 	// eslint-disable-next-line no-console
 	console.log( attributes.localPickupString );
+	// eslint-disable-next-line no-console
+	console.log( 1306 );
+	// This is only bringing in the default value.
+	// eslint-disable-next-line no-console
+	console.log( attributes.deuxPickupString );
 
 	return (
 		<FormStepBlock
@@ -64,12 +82,12 @@ export const Edit = ( {
 		>
 			<Controls />
 			<Block
-				showCompanyField={ showCompanyField }
+				showCompanyField={ true }
 				showApartmentField={ showApartmentField }
-				requireCompanyField={ requireCompanyField }
+				requireCompanyField={ true }
 				showPhoneField={ showPhoneField }
 				requirePhoneField={ requirePhoneField }
-				localPickupString={ attributes.localPickupString }
+				localPickupString={ attributes.deuxPickupString }
 			/>
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_ADDRESS } />
 		</FormStepBlock>

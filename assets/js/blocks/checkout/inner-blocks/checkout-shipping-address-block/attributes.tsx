@@ -19,6 +19,12 @@ export default {
 		),
 	} ),
 	...checkoutShippingMethodsAttribute,
+
+	deuxPickupString: {
+		type: 'string',
+		default: 'deuxPickupString',
+	},
+
 	className: {
 		type: 'string',
 		default: '',

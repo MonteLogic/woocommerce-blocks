@@ -21,6 +21,7 @@ const FrontendBlock = ( {
 	children,
 	className,
 	localPickupString,
+	deuxPickupString,
 }: {
 	title: string;
 	description: string;
@@ -28,6 +29,7 @@ const FrontendBlock = ( {
 	children: JSX.Element;
 	className?: string;
 	localPickupString: string;
+	deuxPickupString: string;
 } ) => {
 	const checkoutIsProcessing = useSelect( ( select ) =>
 		select( CHECKOUT_STORE_KEY ).isProcessing()
@@ -49,6 +51,11 @@ const FrontendBlock = ( {
 	console.log( 1556 );
 	// eslint-disable-next-line no-console
 	console.log( localPickupString );
+	// eslint-disable-next-line no-console
+	// eslint-disable-next-line no-console
+	console.log( 1558 );
+	// eslint-disable-next-line no-console
+	console.log( deuxPickupString );
 	// eslint-disable-next-line no-console
 
 	return (
