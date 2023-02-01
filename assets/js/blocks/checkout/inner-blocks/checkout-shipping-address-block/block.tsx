@@ -37,6 +37,7 @@ const Block = ( {
 	showPhoneField = false,
 	requireCompanyField = false,
 	requirePhoneField = false,
+	deuxPickupString,
 }: {
 	showCompanyField: boolean;
 	showApartmentField: boolean;
@@ -44,6 +45,7 @@ const Block = ( {
 	requireCompanyField: boolean;
 	requirePhoneField: boolean;
 	localPickupString: string;
+	deuxPickupString: string;
 } ): JSX.Element => {
 	const {
 		defaultAddressFields,
@@ -118,6 +120,13 @@ const Block = ( {
 	console.log( localPickupString );
 	// eslint-disable-next-line no-console
 	console.log( 1212 );
+	// eslint-disable-next-line no-console
+	console.log( 1214 );
+
+	// eslint-disable-next-line no-console
+	console.log( deuxPickupString );
+	// eslint-disable-next-line no-console
+	console.log( 1216 );
 
 	// eslint-disable-next-line no-console
 	// console.log( attributes.deuxPickupString );
@@ -145,7 +154,7 @@ const Block = ( {
 		setUseShippingAsBilling( false );
 		return (
 			<>
-				<p>Insert attribute from other block here.</p>
+				<p>{ localPickupString }</p>
 			</>
 		);
 	}
