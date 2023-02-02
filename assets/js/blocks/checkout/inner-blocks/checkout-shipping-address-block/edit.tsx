@@ -60,17 +60,6 @@ export const Edit = ( {
 		deuxPickupString: showString,
 	} );
 
-	// eslint-disable-next-line no-console
-	console.log( 1304 );
-	// This is only bringing in the default value.
-	// eslint-disable-next-line no-console
-	console.log( attributes.localPickupString );
-	// eslint-disable-next-line no-console
-	console.log( 1306 );
-	// This is only bringing in the default value.
-	// eslint-disable-next-line no-console
-	console.log( attributes.deuxPickupString );
-
 	return (
 		<FormStepBlock
 			setAttributes={ setAttributes }
@@ -82,12 +71,13 @@ export const Edit = ( {
 		>
 			<Controls />
 			<Block
-				showCompanyField={ true }
+				showCompanyField={ showCompanyField }
 				showApartmentField={ showApartmentField }
-				requireCompanyField={ true }
+				requireCompanyField={ requireCompanyField }
 				showPhoneField={ showPhoneField }
 				requirePhoneField={ requirePhoneField }
-				localPickupString={ attributes.deuxPickupString }
+				localPickupString={ attributes.localPickupString }
+				deuxPickupString={ attributes.deuxPickupString }
 			/>
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_ADDRESS } />
 		</FormStepBlock>
