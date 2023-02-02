@@ -38,6 +38,14 @@ export const Edit = ( {
 	const getBlocks = useSelect( ( select ) =>
 		select( blockStore ).getBlocks()
 	);
+
+	const showString =
+		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
+			.localPickupString;
+
+	setAttributes( {
+		deuxPickupString: showString,
+	} );
 	const {
 		showCompanyField,
 		showApartmentField,
@@ -52,13 +60,6 @@ export const Edit = ( {
 	if ( ! showShippingFields ) {
 		return null;
 	}
-	const showString =
-		getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
-			.localPickupString;
-
-	setAttributes( {
-		deuxPickupString: showString,
-	} );
 
 	return (
 		<FormStepBlock

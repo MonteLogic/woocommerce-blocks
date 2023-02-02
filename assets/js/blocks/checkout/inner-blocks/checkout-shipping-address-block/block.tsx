@@ -134,10 +134,6 @@ const Block = ( {
 	// eslint-disable-next-line no-console
 	console.log( 1214 );
 
-	const getBlocks = useSelect( ( select ) =>
-		select( blockStore ).getBlocks()
-	);
-
 	const { shippingRates } = useStoreCart();
 
 	// So I guess shippingRates is an array.
@@ -166,11 +162,6 @@ const Block = ( {
 	  Start MoL Codeblock - Part 2
 	*/
 	if ( isEditor ) {
-		// wp.data.select('core/block-editor').getBlocks()
-		const showString =
-			getBlocks[ 0 ].innerBlocks[ 0 ].innerBlocks[ 4 ].attributes
-				.localPickupString;
-
 		setUseShippingAsBilling( false );
 		if ( shippingMethodSelection === 'value2' ) {
 			return (
