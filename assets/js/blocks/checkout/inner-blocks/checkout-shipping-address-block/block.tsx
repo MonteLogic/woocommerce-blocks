@@ -154,7 +154,7 @@ const Block = ( {
 		setUseShippingAsBilling( false );
 		return (
 			<>
-				<p>{ localPickupString }</p>
+				<p>{ deuxPickupString }</p>
 			</>
 		);
 	}
@@ -175,7 +175,7 @@ const Block = ( {
 		if ( shippingMethodSelection === 'value2' ) {
 			return (
 				<>
-					<p>{ showString }</p>
+					<p>{ deuxPickupString }</p>
 				</>
 			);
 		}

@@ -21,6 +21,7 @@ const FrontendBlock = ( {
 	children,
 	className,
 	deuxPickupString,
+	localPickupString,
 }: {
 	title: string;
 	description: string;
@@ -28,6 +29,7 @@ const FrontendBlock = ( {
 	children: JSX.Element;
 	className?: string;
 	deuxPickupString: string;
+	localPickupString: string;
 } ) => {
 	const checkoutIsProcessing = useSelect( ( select ) =>
 		select( CHECKOUT_STORE_KEY ).isProcessing()
@@ -52,6 +54,12 @@ const FrontendBlock = ( {
 	console.log( deuxPickupString );
 	// eslint-disable-next-line no-console
 
+	// eslint-disable-next-line no-console
+	console.log( 1560 );
+	// eslint-disable-next-line no-console
+	console.log( localPickupString );
+	// eslint-disable-next-line no-console
+
 	return (
 		<FormStep
 			id="shipping-fields"
@@ -72,6 +80,7 @@ const FrontendBlock = ( {
 				showCompanyField={ showCompanyField }
 				showPhoneField={ showPhoneField }
 				deuxPickupString={ deuxPickupString }
+				localPickupString={ localPickupString }
 			/>
 			{ children }
 		</FormStep>
