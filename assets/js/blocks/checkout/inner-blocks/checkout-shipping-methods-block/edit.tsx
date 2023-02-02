@@ -190,15 +190,6 @@ export const Edit = ( {
 				options={ optionsArray }
 			/>
 
-			<div>
-				<p>Current shipping method: { shippingMethodSelection }</p>
-				<button
-					onClick={ () => handleShippingMethodChange( 'value4' ) }
-				>
-					Change shipping method
-				</button>
-			</div>
-
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_METHODS } />
 		</FormStepBlock>
 	);
