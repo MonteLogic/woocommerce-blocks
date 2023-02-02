@@ -109,31 +109,6 @@ const Block = ( {
 	  Start MoL Codeblock - Part 1
 	*/
 
-	// const getBlocksID = useSelect( ( select ) =>
-	// 	select( blockStore ).getBlockOrder()
-	// );
-
-	// eslint-disable-next-line no-console
-	console.log( 1210 );
-
-	// eslint-disable-next-line no-console
-	console.log( localPickupString );
-	// eslint-disable-next-line no-console
-	console.log( 1212 );
-	// eslint-disable-next-line no-console
-	console.log( 1214 );
-
-	// eslint-disable-next-line no-console
-	console.log( deuxPickupString );
-	// eslint-disable-next-line no-console
-	console.log( 1216 );
-
-	// eslint-disable-next-line no-console
-	// console.log( attributes.deuxPickupString );
-
-	// eslint-disable-next-line no-console
-	console.log( 1214 );
-
 	const { shippingRates } = useStoreCart();
 
 	// So I guess shippingRates is an array.

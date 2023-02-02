@@ -52,35 +52,8 @@ const renderShippingRatesControlOption = (
 
 export const ValueContext = createContext( false );
 
-const Block = ( {
-	selectedRate,
-}: // onSelectRate: ( selectedRateId: string ) => void
-{
-	selectedRate: CartShippingPackageShippingRate | undefined;
-} ): JSX.Element | null => {
-	// I need to bring in state from the shipping methods block.
-
-	const selectedRateId = selectedRate?.rate_id || '';
-
-	// Store selected rate ID in local state so shipping rates changes are shown in the UI instantly.
-	// I need to pass this selectedRateId into the shipping-address block.
-	const [ selectedOption, setSelectedOption ] = useState( selectedRateId );
-
-	// I need to pass selectedOption here
-	const { isEditor, shippingMethodSelection } = useEditorContext();
-
-	// eslint-disable-next-line no-console
-	console.log( 1960 );
-	// eslint-disable-next-line no-console
-	console.log( shippingMethodSelection );
-
-	// const shippingMethodAttributes =
-	// eslint-disable-next-line no-console
-	console.log( 1980 );
-	// eslint-disable-next-line no-console
-
-	// eslint-disable-next-line no-console
-	console.log( 2010 );
+const Block = (): JSX.Element | null => {
+	const { isEditor } = useEditorContext();
 
 	const {
 		shippingRates,
@@ -116,21 +89,6 @@ const Block = ( {
 			<StoreNoticesContainer
 				context={ noticeContexts.SHIPPING_METHODS }
 			/>
-
-			<br />
-			<br />
-			<br />
-
-			{ /* { isEditor && rates.length > 1 ? (
-				<RadioControl
-					selected={ '' }
-					onChange={ function ( value: string ): void {
-						throw new Error( 'Function not implemented.' );
-					} }
-					// Within this attriubte needs to be the component RadioControlOption
-					options={ [options] }
-				/>
-			) : null } */ }
 
 			{ isEditor && ! shippingRatesPackageCount ? (
 				<NoShippingPlaceholder />
