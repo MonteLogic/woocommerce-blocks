@@ -22,8 +22,6 @@ import type {
 	AddressField,
 	AddressFields,
 } from '@woocommerce/settings';
-import { useSelect } from '@wordpress/data';
-import { store as blockStore } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -31,7 +29,6 @@ import { store as blockStore } from '@wordpress/block-editor';
 import PhoneNumber from '../../phone-number';
 
 const Block = ( {
-	localPickupString,
 	showCompanyField = false,
 	showApartmentField = false,
 	showPhoneField = false,
@@ -44,7 +41,6 @@ const Block = ( {
 	showPhoneField: boolean;
 	requireCompanyField: boolean;
 	requirePhoneField: boolean;
-	localPickupString: string;
 	deuxPickupString: string;
 } ): JSX.Element => {
 	const {

@@ -17,8 +17,7 @@ import type {
 	PackageRateOption,
 	CartShippingPackageShippingRate,
 } from '@woocommerce/types';
-import { createContext, useState } from '@wordpress/element';
-import RadioControl from '@woocommerce/base-components/radio-control';
+import { createContext } from '@wordpress/element';
 
 /**
  * Internal dependencies
